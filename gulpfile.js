@@ -6,8 +6,8 @@ gulp.task('connect', function () {
 	return browserSync.init({
 		files: [
 			'index.html',
-			'style/*.css',
-			'script/*.js'
+			'src/*.css',
+			'vender/js/*.js'
 		],
 		port: 3000,
 		logConnections: true,
