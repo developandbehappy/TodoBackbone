@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+   <link rel="stylesheet" href="style/style.css">
+   <link rel="stylesheet" href="style/bootstrap.min.css">
+   <link rel="stylesheet" href="style/bootstrap-responsive.css">
+  <title>Список заданий</title>
+</head>
+<body>
+<div id="block">
+  <h1 id="h1">Список заданий</h1>
+  <div class="input-append">
+      <input id="text" class="span2" id="appendedInputButton" size="16" type="text" placeholder="Добавить цель"><button id="add" class="btn" type="button">Добавить</button>
+  </div>
+  <div>
+    <ul class="nav nav-tabs" id="nav">
+      <li><a href="#active" class="btn-default" id="active">Активные</a></li>
+      <li><a href="#done" class="btn-default" id="done">Выполненные</a></li>
+      <li><a href="#remove" class="btn-default" id="remove">Удаленные</a></li>  
+    </ul>
+  </div>
+</div>
+<div id="blockOne">
+  <ul id="ul">
+  </ul>
+</div>
+<script type="text/javascript" src="script/jsLib/jquery.min.js"></script>
+<script type="text/javascript" src="script/jsLib/notify.min.js"></script>
+</body>
+</html>
