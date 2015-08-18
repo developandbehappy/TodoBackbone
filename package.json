@@ -1,0 +1,9 @@
+{
+  "name": "todo_list_backbone",
+  "version": "0.0.1",
+  "description": "todoBackbone",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "browser-sync": "^2.8.2",
+  }
+}
