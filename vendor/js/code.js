@@ -5,7 +5,15 @@ var button = $('#add');
 
 $(function () {
 	app.toDo = Backbone.Model.extend({
+		sendDateToLS: function() {
 
+		},
+		sendItemToLS: function() {
+			
+		},
+		getDataFromLS: function() {
+			
+		}
 	});
 });
 
