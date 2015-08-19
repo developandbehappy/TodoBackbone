@@ -1,10 +1,16 @@
-LI = Backbone.View.extend({
-	tagName: "li",
-	initialize: function () {
-		$("#ul").append(this.el);
-	}
+var app = app || {};
+var dataText = $('#text');
+var button = $('#add');
+
+
+$(function () {
+	app.toDo = Backbone.Model.extend({
+
+	});
 });
 
-$(document).ready(function(){
-	var li = new LI();
+
+
+button.on('click', function () {
+	console.log(dataText.val());
 });
