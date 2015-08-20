@@ -1,24 +1,15 @@
-var app = app || {};
-var dataText = $('#text');
-var button = $('#add');
-
-
-$(function () {
-	app.toDo = Backbone.Model.extend({
-		sendDateToLS: function() {
-
-		},
-		sendItemToLS: function() {
-			
-		},
-		getDataFromLS: function() {
-			
-		}
-	});
+var app = Backbone.View.extend({
+  defaults: {
+    array: []
+  },
+  render: function() {
+    console.log('Добавлена новая задача!');
+    this.defaults.array.push(this.$el.val());
+    return this;
+  }
 });
 
-
-
-button.on('click', function () {
-	console.log(dataText.val());
+ap = new app({el: '#text'});
+$('#add').on('click', function() {
+  ap.render();
 });
