@@ -1,15 +1,33 @@
-var app = Backbone.View.extend({
+var Model = Backbone.Model.extend({
   defaults: {
-    array: []
+    title: '',
+    status: 'active',
+    check: false
+  }
+});
+// Модел данных которые будем отправлять в сторедж!
+
+var Collect = Backbone.Collection.extend({
+  model: Model
+});
+  
+var textAdd = Backbone.View.extend({
+  el: '#block',
+  events: {
+    'click #add': 'consoleLog'
   },
-  render: function() {
-    console.log('Добавлена новая задача!');
-    this.defaults.array.push(this.$el.val());
-    return this;
+  consoleLog: function() {
+    var text = $('#text');
+    if(text.val().length > 0) {
+      console.log('Добавлена новая цель! [ '+ text.val() +' ]');
+      colMod.add([{
+        title: text.val()
+      }]);
+      text.val('');
+    }
   }
 });
 
-ap = new app({el: '#text'});
-$('#add').on('click', function() {
-  ap.render();
-});
+colMod = new Collect();
+
+var todo = new textAdd();
