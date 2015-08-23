@@ -14,20 +14,30 @@ var Collect = Backbone.Collection.extend({
 var textAdd = Backbone.View.extend({
   el: '#block',
   events: {
-    'click #add': 'consoleLog'
+    'click #add': 'addLocal'
   },
-  consoleLog: function() {
+  addLocal: function() {
     var text = $('#text');
     if(text.val().length > 0) {
       console.log('Добавлена новая цель! [ '+ text.val() +' ]');
       colMod.add([{
         title: text.val()
       }]);
+
       text.val('');
     }
+  },
+  newfunc: function() {
+    colMod.forEach(function(colMod) {
+      console.log(colMod.toJSON().title);
+    });
   }
 });
 
-colMod = new Collect();
+$(function() {
+  colMod = new Collect();
+  todo = new textAdd();
 
-var todo = new textAdd();
+
+});
+
