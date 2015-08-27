@@ -1,4 +1,9 @@
-var Model = Backbone.Model.extend({
+var app = app || {};
+
+
+$(function() {
+
+app.Model = Backbone.Model.extend({
   defaults: {
     title: '',
     status: 'active',
@@ -6,37 +11,19 @@ var Model = Backbone.Model.extend({
   }
 });
 // Модел данных которые будем отправлять в сторедж!
+app.COLLECTION = Backbone.Collection.extend({model: app.Model});
 
-var Collect = Backbone.Collection.extend({
-  model: Model
-});
-  
-var textAdd = Backbone.View.extend({
-  el: '#block',
-  events: {
-    'click #add': 'addLocal'
-  },
-  addLocal: function() {
-    var text = $('#text');
-    if(text.val().length > 0) {
-      console.log('Добавлена новая цель! [ '+ text.val() +' ]');
-      colMod.add([{
-        title: text.val()
-      }]);
-
-      text.val('');
-    }
-  },
-  newfunc: function() {
-    colMod.forEach(function(colMod) {
-      console.log(colMod.toJSON().title);
-    });
+app.VIEW = Backbone.View.extend({
+  initialize: function() {
+    console.log('connect!');
   }
 });
 
-$(function() {
-  colMod = new Collect();
-  todo = new textAdd();
+collection = new app.COLLECTION({
+  title: 'hello i\'m work!'
+});
+
+view = new app.VIEW();
 
 
 });
