@@ -28,10 +28,14 @@ $(function() {
       },this);
     },
     renderTodo: function() {
-      $('#ul li').remove();
-      this.getStorage().forEach(function(data) {
-        this.$('#ul').append(this.template(data));
-      },this);
+      if(localStorage.getItem('todo').length === 0) {
+        localStorage.setItem('todo','[]');
+      } else {
+        $('#ul li').remove();
+        this.getStorage().forEach(function(data) {
+          this.$('#ul').append(this.template(data));
+        },this);
+      }
     },
     addItem: function() {
       if($('#text').val().length > 0) {
@@ -51,7 +55,11 @@ $(function() {
       }
     },
     addStorage: function() {
-      localStorage.setItem('todo',JSON.stringify(collection));
+      if(JSON.parse(localStorage.getItem('todo')).length > 0) {
+        localStorage.setItem('todo',JSON.stringify(collection) + localStorage.getItem('todo'));
+      } else {
+        localStorage.setItem('todo',JSON.stringify(collection));
+      }
     },
     getStorage: function() {
       return JSON.parse(localStorage.getItem('todo')) || false
