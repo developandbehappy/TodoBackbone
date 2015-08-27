@@ -19,30 +19,33 @@ $(function() {
       this.renderTodo();
     },
     events: {
-        "click ": "doSearch"  
+        "click #add": "addItem"
     },
     render: function() {
       $('#ul li').remove();
       this.collection.each(function(col) {
-        this.$el.append(this.template(col.toJSON()))
+        this.$('#ul').append(this.template(col.toJSON()))
       },this);
     },
     renderTodo: function() {
+      $('#ul li').remove();
       this.getStorage().forEach(function(data) {
-        this.$el.append(this.template(data));
+        this.$('#ul').append(this.template(data));
       },this);
     },
     addItem: function() {
       if($('#text').val().length > 0) {
-        this.collection.add({ 
+        this.collection.add({
           title: $('#text').val(),
           id: this.collection.length
         },this);
-        $.notify('\'' + $('#text').val() + '\'' + ' Добавлено', 'success');
-        console.log('[ ' + $('#text').val() + ' ] успешно добавлено');
+        $.notify('\'' + $('#text').val()
+         + '\'' + ' Добавлено', 'success');
+        console.log('[ ' + $('#text').val()
+         + ' ] успешно добавлено');
         $('#text').val('');
         this.addStorage();
-        this.getStorage();
+        this.renderTodo();
       } else {
         $.notify('Вы не можете добавить пустое задание');
       }
@@ -53,14 +56,14 @@ $(function() {
     getStorage: function() {
       return JSON.parse(localStorage.getItem('todo')) || false
     },
-    doSearch: function( event ) {
+    doSearch: function() {
       console.log('hi');
     }
   });
 
   collection = new app.COLLECTION();
 
-  view = new app.VIEW({el: '#ul',collection: collection});
+  view = new app.VIEW({el: 'body',collection: collection});
 
 
   // $('#add').click(function() {
