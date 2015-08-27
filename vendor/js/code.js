@@ -16,12 +16,20 @@ $(function() {
     template: _.template( $('#template').html() ),
     initialize: function() {
       this.render();
-      this.getStorage();
+      this.renderTodo();
+    },
+    events: {
+        "click ": "doSearch"  
     },
     render: function() {
       $('#ul li').remove();
       this.collection.each(function(col) {
         this.$el.append(this.template(col.toJSON()))
+      },this);
+    },
+    renderTodo: function() {
+      this.getStorage().forEach(function(data) {
+        this.$el.append(this.template(data));
       },this);
     },
     addItem: function() {
@@ -34,6 +42,7 @@ $(function() {
         console.log('[ ' + $('#text').val() + ' ] успешно добавлено');
         $('#text').val('');
         this.addStorage();
+        this.getStorage();
       } else {
         $.notify('Вы не можете добавить пустое задание');
       }
@@ -42,10 +51,10 @@ $(function() {
       localStorage.setItem('todo',JSON.stringify(collection));
     },
     getStorage: function() {
-      localStorage.getItem('todo');
-      JSON.parse(localStorage.getItem('todo')).forEach(function(e) {
-        this.$el.append(this.template(e));
-      },this);
+      return JSON.parse(localStorage.getItem('todo')) || false
+    },
+    doSearch: function( event ) {
+      console.log('hi');
     }
   });
 
@@ -54,10 +63,10 @@ $(function() {
   view = new app.VIEW({el: '#ul',collection: collection});
 
 
-  $('#add').click(function() {
-    view.addItem();
-    view.render();
-  });
+  // $('#add').click(function() {
+  //   view.addItem();
+  //   view.render();
+  // });
 
 });
 
