@@ -16,6 +16,7 @@ $(function() {
     template: _.template( $('#template').html() ),
     initialize: function() {
       this.render();
+      this.getStorage();
     },
     render: function() {
       $('#ul li').remove();
@@ -39,6 +40,12 @@ $(function() {
     },
     addStorage: function() {
       localStorage.setItem('todo',JSON.stringify(collection));
+    },
+    getStorage: function() {
+      localStorage.getItem('todo');
+      JSON.parse(localStorage.getItem('todo')).forEach(function(e) {
+        this.$el.append(this.template(e));
+      },this);
     }
   });
 
