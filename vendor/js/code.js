@@ -14,17 +14,33 @@ app.Model = Backbone.Model.extend({
 app.COLLECTION = Backbone.Collection.extend({model: app.Model});
 
 app.VIEW = Backbone.View.extend({
+  template: _.template( $('#template').html() ),
   initialize: function() {
-    console.log('connect!');
+    this.render();
+  },
+  render: function() {
+    $('#ul li').remove();
+    this.collection.each(function(col) {
+      this.$el.append(this.template(col.toJSON()))
+    },this);
+  },
+  addItem: function() {
+    this.collection.add({ 
+      title: $('#text').val(),
+      cid: this.collection.length
+    },this);
+    console.log(collection);
   }
 });
 
-collection = new app.COLLECTION({
-  title: 'hello i\'m work!'
+collection = new app.COLLECTION();
+
+view = new app.VIEW({el: '#ul',collection: collection});
+
+
+$('#add').click(function() {
+  view.addItem();
+  view.render();
 });
-
-view = new app.VIEW();
-
-
 });
 
