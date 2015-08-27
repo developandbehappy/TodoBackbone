@@ -25,11 +25,14 @@ app.VIEW = Backbone.View.extend({
     },this);
   },
   addItem: function() {
-    this.collection.add({ 
-      title: $('#text').val(),
-      cid: this.collection.length
-    },this);
-    console.log(collection);
+    if($('#text').val().length > 0) {
+      this.collection.add({ 
+        title: $('#text').val(),
+        cid: this.collection.length
+      },this);
+      $('#text').val('');
+      console.log(collection);
+    }
   }
 });
 
