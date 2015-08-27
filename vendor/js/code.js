@@ -41,7 +41,7 @@ $(function() {
       if($('#text').val().length > 0) {
         this.collection.add({
           title: $('#text').val(),
-          id: this.collection.length
+          id: this.collection.length || localStorage.getItem('todo').length
         },this);
         $.notify('\'' + $('#text').val()
          + '\'' + ' Добавлено', 'success');
@@ -56,7 +56,7 @@ $(function() {
     },
     addStorage: function() {
       if(JSON.parse(localStorage.getItem('todo')).length > 0) {
-        localStorage.setItem('todo',JSON.stringify(collection) + localStorage.getItem('todo'));
+        localStorage.setItem('todo',JSON.stringify(collection).replace(']',',') + localStorage.getItem('todo').replace('[',''));
       } else {
         localStorage.setItem('todo',JSON.stringify(collection));
       }
