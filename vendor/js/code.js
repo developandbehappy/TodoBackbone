@@ -32,6 +32,8 @@ app.VIEW = Backbone.View.extend({
       },this);
       $('#text').val('');
       console.log(collection);
+    } else {
+      $.notify('Вы не можете добавить пустое задание');
     }
   }
 });
