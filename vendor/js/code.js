@@ -6,7 +6,7 @@ $(function() {
     defaults: {
       title: '',
       status: 'active',
-      check: false
+      check: ''
     }
   });
   // Модел данных которые будем отправлять в сторедж!
@@ -26,7 +26,7 @@ $(function() {
     render: function() {
       $('#ul li').remove();
       this.collection.each(function(col) {
-        this.$('#ul').append(this.template(col.toJSON()))
+        this.$('#ul').append(this.template(col.toJSON()));
       },this);
     },
     renderTodo: function() {
@@ -71,12 +71,9 @@ $(function() {
       return collection.add(JSON.parse(localStorage.getItem('todo'))) || false
     },
     clickLabel: function(e) {
-      // console.log(e.toElement.control.checked);
-      console.log(this.collection.at(e.toElement.control.id));
-      this.collection.at(e.toElement.control.id).set('check',!e.toElement.control.checked);
-      console.log(this.collection.at(e.toElement.control.id).toJSON());
+      this.collection.at(e.toElement.control.id).set('check','checked');
       this.addStorage();
-      console.log(this.collection.at(e.toElement.control.id));
+      console.log(this);
       // console.log(e);
     }
   });
