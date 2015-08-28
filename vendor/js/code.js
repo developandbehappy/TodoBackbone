@@ -72,9 +72,11 @@ $(function() {
     },
     clickLabel: function(e) {
       // console.log(e.toElement.control.checked);
-      // console.log(this.collection.at(e.toElement.control.id));
-      this.collection.at(e.toElement.control.id).set('check',e.toElement.control.checked);
-      console.log(this.collection.at(e.toElement.control.id).toJSON())
+      console.log(this.collection.at(e.toElement.control.id));
+      this.collection.at(e.toElement.control.id).set('check',!e.toElement.control.checked);
+      console.log(this.collection.at(e.toElement.control.id).toJSON());
+      this.addStorage();
+      console.log(this.collection.at(e.toElement.control.id));
       // console.log(e);
     }
   });
