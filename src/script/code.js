@@ -15,7 +15,10 @@ $(function() {
   app.VIEW = Backbone.View.extend({
     events: {
         "click #add": "addItem",
-        "click label": "clickLabel"
+        "click label": "clickLabel",
+        "click #active": "activeBlock",
+        "click #done": "doneBlock",
+        "click #remove": "removeBlock"
     },
     template: _.template( $('#template').html() ),
     initialize: function() {
@@ -75,14 +78,30 @@ $(function() {
       return collection.add(JSON.parse(localStorage.getItem('todo'))) || false
     },
     clickLabel: function(e) {
-      if(this.collection.at(e.toElement.control.id).get('check') != 'checked') {
-        this.collection.at(e.toElement.control.id).set('check','checked');
+      var elId = e.toElement.control.id;
+      if(this.collection.at(elId).get('check') != 'checked') {
+        this.collection.at(elId).set('check','checked');
       } else {
-        this.collection.at(e.toElement.control.id).set('check','');
+        this.collection.at(elId).set('check','');
       }
       this.addStorage();
       console.log(this);
       // console.log(e);
+    },
+    activeBlock: function() {
+      console.log('active!');
+      $('#ul li').remove();
+      this.collection.each(function(col) {
+        if(col.get('check') !== 'checked') {
+          this.$('#ul').append(this.template(col.toJSON()));
+        }
+      },this);
+    },
+    doneBlock: function() {
+      console.log('done!')
+    },
+    removeBlock: function() {
+      console.log('remove!')
     }
   });
 
