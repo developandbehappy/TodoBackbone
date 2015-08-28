@@ -40,10 +40,14 @@ $(function() {
       }
     },
     addItem: function() {
-      if($('#text').val().length > 0) {
+      var textLength = $('#text').val().length;
+      var todo = JSON.parse(localStorage.getItem('todo'));
+      var todoLenght = todo.length;
+      var id = this.collection.length || todoLenght;
+      if(textLength > 0) {
         this.collection.add({
           title: $('#text').val(),
-          id: this.collection.length || JSON.parse(localStorage.getItem('todo')).length
+          id: id
         },this);
         $.notify('\'' + $('#text').val()
          + '\'' + ' Добавлено', 'success');
