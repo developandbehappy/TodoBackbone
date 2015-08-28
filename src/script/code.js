@@ -98,7 +98,13 @@ $(function() {
       },this);
     },
     doneBlock: function() {
-      console.log('done!')
+      console.log('done!');
+      $('#ul li').remove();
+      this.collection.each(function(col) {
+        if(col.get('check') === 'checked') {
+          this.$('#ul').append(this.template(col.toJSON()));
+        }
+      },this);
     },
     removeBlock: function() {
       console.log('remove!')
