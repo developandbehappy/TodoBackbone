@@ -40,20 +40,20 @@ $(function() {
       }
     },
     addItem: function() {
-      var textLength = $('#text').val().length;
+      var $text = $('#text');
+      var textVal = $text.val();
+      var textLength = textVal.length;
       var todo = JSON.parse(localStorage.getItem('todo'));
       var todoLenght = todo.length;
       var id = this.collection.length || todoLenght;
       if(textLength > 0) {
         this.collection.add({
-          title: $('#text').val(),
+          title: textVal,
           id: id
         },this);
-        $.notify('\'' + $('#text').val()
-         + '\'' + ' Добавлено', 'success');
-        console.log('[ ' + $('#text').val()
-         + ' ] успешно добавлено');
-        $('#text').val('');
+        $.notify('\'' + textVal + '\'' + ' Добавлено', 'success');
+        console.log('[ ' + textVal + ' ] успешно добавлено');
+        $text.val('');
         this.addStorage();
         this.renderTodo();
       } else {
