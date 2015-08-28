@@ -71,7 +71,11 @@ $(function() {
       return collection.add(JSON.parse(localStorage.getItem('todo'))) || false
     },
     clickLabel: function(e) {
-      this.collection.at(e.toElement.control.id).set('check','checked');
+      if(this.collection.at(e.toElement.control.id).get('check') != 'checked') {
+        this.collection.at(e.toElement.control.id).set('check','checked');
+      } else {
+        this.collection.at(e.toElement.control.id).set('check','');
+      }
       this.addStorage();
       console.log(this);
       // console.log(e);
