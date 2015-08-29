@@ -32,6 +32,9 @@ $(function() {
       },this);
     },
     renderTodo: function() {
+      if(localStorage.getItem('todo') === null) {
+        localStorage.setItem('todo','[]');
+      }
       if(localStorage.getItem('todo').length === 0) {
         localStorage.setItem('todo','[]');
       } else {
