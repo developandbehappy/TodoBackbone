@@ -45,10 +45,11 @@ $(function() {
       var $text = $('#text');
       var textVal = $text.val();
       var textLength = textVal.length;
-      var todo = JSON.parse(localStorage.getItem('todo'));
-      var id = this.collection.length || localStorage.getItem('todo').length > 0 || false;
+      var todo = JSON.parse(localStorage.getItem('todo')) || false;
+      var todoLenght = todo.length;
+      var id = this.collection.length;
       if(textLength > 0) {
-        if(!localStorage.getItem('todo')) {
+        if(!todo) {
           localStorage.setItem('todo','[]');
         }
         this.collection.add({
