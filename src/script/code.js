@@ -32,11 +32,8 @@ $(function() {
       },this);
     },
     renderTodo: function() {
-      if(localStorage.getItem('todo') === null) {
+      if(localStorage.getItem('todo') === null || localStorage.getItem('todo').length === 0) {
           localStorage.setItem('todo','[]');
-      }
-      if(localStorage.getItem('todo').length === 0) {
-        localStorage.setItem('todo','[]');
       } else {
         $('#ul li').remove();
         this.getStorage().forEach(function(data) {
@@ -49,10 +46,9 @@ $(function() {
       var textVal = $text.val();
       var textLength = textVal.length;
       var todo = JSON.parse(localStorage.getItem('todo'));
-      var todoLenght = todo.length;
-      var id = this.collection.length || todoLenght;
+      var id = this.collection.length || localStorage.getItem('todo').length > 0 || false;
       if(textLength > 0) {
-        if(localStorage.getItem('todo') === null) {
+        if(!localStorage.getItem('todo')) {
           localStorage.setItem('todo','[]');
         }
         this.collection.add({
