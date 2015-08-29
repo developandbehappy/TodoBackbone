@@ -32,6 +32,9 @@ $(function() {
       },this);
     },
     renderTodo: function() {
+      if(localStorage.getItem('todo') === null) {
+          localStorage.setItem('todo','[]');
+      }
       if(localStorage.getItem('todo').length === 0) {
         localStorage.setItem('todo','[]');
       } else {
@@ -48,15 +51,14 @@ $(function() {
       var todo = JSON.parse(localStorage.getItem('todo'));
       var todoLenght = todo.length;
       var id = this.collection.length || todoLenght;
-      }
       if(textLength > 0) {
+        if(localStorage.getItem('todo') === null) {
+          localStorage.setItem('todo','[]');
+        }
         this.collection.add({
           title: textVal,
           id: id
         },this);
-        if(localStorage.getItem('todo') === null) {
-        localStorage.setItem('todo','[]');
-        }
         $.notify('\'' + textVal + '\'' + ' Добавлено', 'success');
         console.log('[ ' + textVal + ' ] успешно добавлено');
         $text.val('');
