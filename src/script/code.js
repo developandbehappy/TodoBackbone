@@ -22,7 +22,6 @@ $(function() {
     },
     template: _.template( $('#template').html() ),
     initialize: function() {
-      this.render();
       this.renderTodo();
       this.setCollect();
     },
