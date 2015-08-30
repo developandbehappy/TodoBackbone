@@ -23,8 +23,9 @@ $(function() {
     template: _.template( $('#template').html() ),
     initialize: function() {
       this.setCollect();
-      this.render();
       this.renderTodo();
+      this.render();
+
     },
     render: function() {
       if(window.location.hash === '#active') {
