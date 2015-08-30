@@ -72,6 +72,7 @@ $(function() {
         $text.val('');
         this.addStorage();
         this.renderTodo();
+        window.location.hash = '#all'
       } else {
         $.notify('Вы не можете добавить пустое задание');
       }
