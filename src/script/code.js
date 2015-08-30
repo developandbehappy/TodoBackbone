@@ -24,6 +24,7 @@ $(function() {
     initialize: function() {
       this.setCollect();
       this.render();
+      this.renderTodo();
     },
     render: function() {
       if(window.location.hash === '#active') {
@@ -33,21 +34,21 @@ $(function() {
        this.doneBlock();
       }
       else if(window.location.hash === '#remove') {
-       this.removeBlock()
+       this.removeBlock();
       } else {
-        this.renderTodo();
-        console.log('Получил все данные со стореджа! Вот они');
-        console.log(this.getStorage());
+        return true
       }
     },
     renderTodo: function() {
-      if(localStorage.getItem('todo').length === 0) {
+      if(localStorage.getItem('todo') === null || localStorage.getItem('todo').length === 0 ) {
           localStorage.setItem('todo','[]');
       } else {
         $('#ul li').remove();
         this.getStorage().forEach(function(data) {
           this.$('#ul').append(this.template(data));
         },this);
+        console.log('Получил все данные со стореджа! Вот они');
+        console.log(this.getStorage());
       }
     },
     addItem: function() {
