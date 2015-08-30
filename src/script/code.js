@@ -22,17 +22,24 @@ $(function() {
     },
     template: _.template( $('#template').html() ),
     initialize: function() {
-      this.renderTodo();
       this.setCollect();
+      this.render();
     },
     render: function() {
-      $('#ul li').remove();
-      this.collection.each(function(col) {
-        this.$('#ul').append(this.template(col.toJSON()));
-      },this);
+      if(window.location.hash === '#active') {
+       this.activeBlock();
+      }
+      else if(window.location.hash === '#done') {
+       this.doneBlock();
+      }
+      else if(window.location.hash === '#remove') {
+       this.removeBlock()
+      } else {
+        this.renderTodo();
+      }
     },
     renderTodo: function() {
-      if(localStorage.getItem('todo') === null || localStorage.getItem('todo').length === 0) {
+      if(localStorage.getItem('todo').length === 0) {
           localStorage.setItem('todo','[]');
       } else {
         $('#ul li').remove();
@@ -40,6 +47,23 @@ $(function() {
           this.$('#ul').append(this.template(data));
         },this);
       }
+    },
+    hashData: function(active, done, remove) {
+      if(active) {
+        console.log('active!');
+        $('#ul li').remove();
+        this.collection.each(function(col) {
+          if(col.get('check') !== 'checked') {
+            this.$('#ul').append(this.template(col.toJSON()));
+          }
+        },this);
+      }
+      else if(done) {
+
+      }
+      else if(remove) {
+
+      }else{}
     },
     addItem: function() {
       var $text = $('#text');
