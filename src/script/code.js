@@ -36,6 +36,8 @@ $(function() {
        this.removeBlock()
       } else {
         this.renderTodo();
+        console.log('Получил все данные со стореджа! Вот они');
+        console.log(this.getStorage());
       }
     },
     renderTodo: function() {
@@ -47,23 +49,6 @@ $(function() {
           this.$('#ul').append(this.template(data));
         },this);
       }
-    },
-    hashData: function(active, done, remove) {
-      if(active) {
-        console.log('active!');
-        $('#ul li').remove();
-        this.collection.each(function(col) {
-          if(col.get('check') !== 'checked') {
-            this.$('#ul').append(this.template(col.toJSON()));
-          }
-        },this);
-      }
-      else if(done) {
-
-      }
-      else if(remove) {
-
-      }else{}
     },
     addItem: function() {
       var $text = $('#text');
