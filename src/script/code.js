@@ -59,7 +59,7 @@ $(function() {
       var todo = JSON.parse(localStorage.getItem('todo')) || false;
       var todoLenght = todo.length;
       var id = this.collection.length;
-      if(textLength > 0) {
+      if(textLength > 0 && textLength < 40) {
         if(!todo) {
           localStorage.setItem('todo','[]');
         }
@@ -74,7 +74,11 @@ $(function() {
         this.renderTodo();
         window.location.hash = '#all'
       } else {
-        $.notify('Вы не можете добавить пустое задание');
+          if(textLength > 40) {
+            $.notify('Вы не можете добавить задание больше 40 символов!');
+          } else {
+          $.notify('Вы не можете добавить пустое задание');
+        }
       }
     },
     addStorage: function() {
