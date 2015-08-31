@@ -6,5 +6,18 @@
   "devDependencies": {
     "browser-sync": "^2.8.2",
     "gulp": "^3.9.0"
-  }
+  },
+  "scripts": {
+    "test": "./node_modules/gulp/bin/gulp.js test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zidein07/todoBackbone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zidein07/todoBackbone/issues"
+  },
+  "homepage": "https://github.com/zidein07/todoBackbone#readme"
 }

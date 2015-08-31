@@ -2,6 +2,10 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 
 
+gulp.task('test', function() {
+	console.log('ok! i require')
+});
+
 gulp.task('connect', function () {
 	return browserSync.init({
 		files: [
