@@ -1,5 +1,5 @@
 var app = app || {};
-
+var StorageHelper = StorageHelper || {};
 
 $(function() {
   app.Model = Backbone.Model.extend({
@@ -84,9 +84,9 @@ $(function() {
     addStorage: function() {
       if(JSON.parse(localStorage.getItem('todo')).length > 0) {
         this.setCollect();
-        localStorage.setItem('todo',JSON.stringify(collection));
+        StorageHelper.setObject('todo',collection)
       } else {
-        localStorage.setItem('todo',JSON.stringify(collection));
+        StorageHelper.setObject('todo',collection)
       }
     },
     getStorage: function() {
