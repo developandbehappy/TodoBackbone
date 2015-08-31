@@ -1,7 +1,7 @@
 var app = app || {};
 var StorageHelper = StorageHelper || {};
 
-$(function() {
+
   app.Model = Backbone.Model.extend({
     defaults: {
       title: '',
@@ -129,6 +129,8 @@ $(function() {
     }
   });
 
+$(function() {
+  
   collection = new app.COLLECTION();
 
   view = new app.VIEW({el: 'body',collection: collection});
