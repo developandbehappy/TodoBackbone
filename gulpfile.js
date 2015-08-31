@@ -3,7 +3,7 @@ var browserSync = require('browser-sync').create();
 
 
 gulp.task('test', function() {
-	return false
+	process.exit(1);
 });
 
 gulp.task('connect', function () {
