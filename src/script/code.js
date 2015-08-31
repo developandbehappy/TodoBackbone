@@ -56,7 +56,7 @@ $(function() {
       var $text = $('#text');
       var textVal = $text.val();
       var textLength = textVal.length;
-      var todo = JSON.parse(localStorage.getItem('todo')) || false;
+      var todo = StorageHelper.get('todo') || false;
       var todoLenght = todo.length;
       var id = this.collection.length;
       if(textLength > 0 && textLength < 40) {
@@ -82,7 +82,7 @@ $(function() {
       }
     },
     addStorage: function() {
-      if(JSON.parse(localStorage.getItem('todo')).length > 0) {
+      if(!StorageHelper.get('todo')) {
         this.setCollect();
         StorageHelper.setObject('todo',collection)
       } else {
@@ -90,10 +90,10 @@ $(function() {
       }
     },
     getStorage: function() {
-      return JSON.parse(localStorage.getItem('todo')) || false
+      return StorageHelper.get('todo')
     },
     setCollect: function() {
-      return collection.add(JSON.parse(localStorage.getItem('todo'))) || false
+      return collection.add(StorageHelper.get('todo')) || false
     },
     clickLabel: function(e) {
       var elId = e.toElement.control.id;
