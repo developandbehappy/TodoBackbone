@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zidein07/todoBackbone.git"
+    "url": "git+https://github.com/zidein07/TodoBackbone.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zidein07/todoBackbone/issues"
+    "url": "https://github.com/zidein07/TodoBackbone/issues"
   },
-  "homepage": "https://github.com/zidein07/todoBackbone#readme"
+  "homepage": "https://github.com/zidein07/TodoBackbone#readme"
 }
