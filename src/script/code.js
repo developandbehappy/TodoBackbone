@@ -101,8 +101,12 @@ $(function() {
       var elId = e.toElement.control.id;
       if(this.collection.at(elId).get('check') != 'checked') {
         this.collection.at(elId).set('check','checked');
+        e.toElement.style.color = '#000';
+        e.toElement.style.textDecoration = 'line-through'
       } else {
         this.collection.at(elId).set('check','');
+        e.toElement.style.color = '#fff';
+        e.toElement.style.textDecoration = 'none'
       }
       this.addStorage();
       console.log(this);

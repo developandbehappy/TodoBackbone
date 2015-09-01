@@ -20,4 +20,4 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.task('default',['connect','test']);
+gulp.task('default',['connect']);
