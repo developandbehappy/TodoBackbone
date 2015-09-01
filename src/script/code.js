@@ -2,6 +2,8 @@ var app = app || {};
 var StorageHelper = StorageHelper || {};
 
 
+$(function() {
+
   app.Model = Backbone.Model.extend({
     defaults: {
       title: '',
@@ -128,8 +130,6 @@ var StorageHelper = StorageHelper || {};
       console.log('remove!')
     }
   });
-
-$(function() {
   
   collection = new app.COLLECTION();
 
