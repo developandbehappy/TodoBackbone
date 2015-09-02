@@ -18,7 +18,7 @@ $(function() {
   app.VIEW = Backbone.View.extend({
     events: {
         "click #add": "addItem",
-        "click label": "clickLabel",
+        "click .clickLabel": "clickLabel",
         "click #active": "activeBlock",
         "click #done": "doneBlock",
         "click #remove": "removeBlock",
@@ -144,6 +144,8 @@ $(function() {
         }
       },this);
       $('#ul li input').remove();
+      $('#ul li label').removeClass('clickLabel');
+
     },
     deleteLabel: function(e) {
       var elId = e.toElement.parentElement.children[0].id;
