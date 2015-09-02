@@ -96,12 +96,17 @@ body {
   transition: all 1s ease-out 0.5s;
 }
 
-.imgMus, .ret {
+.imgMus {
     float: right;
     position: relative;
     right: 10px;
     bottom: 20px;
     color: #444;
+}
+
+.imgMus:hover {
+    color: #fff;
+    cursor: pointer;
 }
 
 .ret {

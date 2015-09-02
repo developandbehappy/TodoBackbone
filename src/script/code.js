@@ -22,7 +22,8 @@ $(function() {
         "click #active": "activeBlock",
         "click #done": "doneBlock",
         "click #remove": "removeBlock",
-        "click #act": "deleteLabel"
+        "click #act": "deleteLabel",
+        "click #delete":"returnLabel"
     },
     template: _.template( $('#template').html() ),
     initialize: function() {
@@ -52,7 +53,7 @@ $(function() {
         this.getStorage().forEach(function(data) {
           this.$('#ul').append(this.template(data));
         },this);
-        console.log('Получил все данные со стореджа! Вот они');
+        console.log('Получил все данные со стореджа!');
         console.log(this.getStorage());
       }
     },
@@ -147,10 +148,15 @@ $(function() {
       this.collection.at(elId).set('status','delete');
       this.collection.at(elId).set('ico','fa-history');
       this.addStorage();
-      console.log('Было удаленно задание! ->' + this.collection.at(elId).get('title'))
+      console.log('Было удаленно задание! ->' + this.collection.at(elId).get('title'));
     },
-    returnLabel: function() {
-
+    returnLabel: function(e) {
+      var elId = e.toElement.parentElement.children[0].id;
+      this.collection.at(elId).set('status','active');
+      this.collection.at(elId).set('ico','fa-times');
+      this.addStorage();
+      console.log('Было возвращенно задание ->' + this.collection.at(elId).get('title'));
+    
     }
   });
   
