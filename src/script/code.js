@@ -109,7 +109,6 @@ $(function() {
         e.toElement.style.textDecoration = 'none'
       }
       this.addStorage();
-      console.log(this);
       // console.log(e);
     },
     activeBlock: function() {
@@ -129,6 +128,8 @@ $(function() {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       },this);
+      $('ul li label').css({'color':'#000'});
+      $('ul li label').css({'text-decoration':'line-through'});
     },
     removeBlock: function() {
       console.log('remove!')
