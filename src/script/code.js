@@ -23,7 +23,7 @@ $(function() {
         "click #done": "doneBlock",
         "click #remove": "removeBlock",
         "click #act": "deleteLabel",
-        "click #delete":"returnLabel"
+        "click #delete": "returnLabel"
     },
     template: _.template( $('#template').html() ),
     initialize: function() {
@@ -112,6 +112,7 @@ $(function() {
         e.toElement.style.textDecoration = 'none'
       }
       this.addStorage();
+      this.initialize();
       // console.log(e);
     },
     activeBlock: function() {
@@ -149,6 +150,7 @@ $(function() {
       this.collection.at(elId).set('ico','fa-history');
       this.collection.at(elId).set('check','');
       this.addStorage();
+      this.initialize();
       console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
     },
     returnLabel: function(e) {
@@ -156,6 +158,7 @@ $(function() {
       this.collection.at(elId).set('status','act');
       this.collection.at(elId).set('ico','fa-times');
       this.addStorage();
+      this.initialize();
       console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));    
     }
   });
