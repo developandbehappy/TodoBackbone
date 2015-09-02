@@ -7,8 +7,9 @@ $(function() {
   app.Model = Backbone.Model.extend({
     defaults: {
       title: '',
-      status: 'active',
-      check: ''
+      status: 'act',
+      check: '',
+      ico: 'fa-times'
     }
   });
   // Модел данных которые будем отправлять в сторедж!
@@ -21,7 +22,7 @@ $(function() {
         "click #active": "activeBlock",
         "click #done": "doneBlock",
         "click #remove": "removeBlock",
-        "click #delete": "deleteLabel"
+        "click #act": "deleteLabel"
     },
     template: _.template( $('#template').html() ),
     initialize: function() {
@@ -144,8 +145,12 @@ $(function() {
     deleteLabel: function(e) {
       var elId = e.toElement.parentElement.children[0].id;
       this.collection.at(elId).set('status','delete');
+      this.collection.at(elId).set('ico','fa-history');
       this.addStorage();
       console.log('Было удаленно задание! ->' + this.collection.at(elId).get('title'))
+    },
+    returnLabel: function() {
+
     }
   });
   
