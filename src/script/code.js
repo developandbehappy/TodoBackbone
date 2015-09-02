@@ -20,7 +20,8 @@ $(function() {
         "click label": "clickLabel",
         "click #active": "activeBlock",
         "click #done": "doneBlock",
-        "click #remove": "removeBlock"
+        "click #remove": "removeBlock",
+        "click #delete": "deleteLabel"
     },
     template: _.template( $('#template').html() ),
     initialize: function() {
@@ -115,7 +116,7 @@ $(function() {
       console.log('active!');
       $('#ul li').remove();
       this.collection.each(function(col) {
-        if(col.get('check') !== 'checked') {
+        if(col.get('check') !== 'checked' && col.get('status') !== 'delete') {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       },this);
@@ -124,7 +125,7 @@ $(function() {
       console.log('done!');
       $('#ul li').remove();
       this.collection.each(function(col) {
-        if(col.get('check') === 'checked') {
+        if(col.get('check') === 'checked' && col.get('status') !== 'delete') {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       },this);
@@ -132,7 +133,19 @@ $(function() {
       $('ul li label').css({'text-decoration':'line-through'});
     },
     removeBlock: function() {
-      console.log('remove!')
+      console.log('remove!');
+      $('#ul li').remove();
+      this.collection.each(function(col) {
+        if(col.get('status') === 'delete') {
+          this.$('#ul').append(this.template(col.toJSON()));
+        }
+      },this);
+    },
+    deleteLabel: function(e) {
+      var elId = e.toElement.parentElement.children[0].id;
+      this.collection.at(elId).set('status','delete');
+      this.addStorage();
+      console.log('Было удаленно задание! ->' + this.collection.at(elId).get('title'))
     }
   });
   

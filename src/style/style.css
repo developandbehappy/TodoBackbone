@@ -99,7 +99,9 @@ body {
 .imgMus, .ret {
     float: right;
     position: relative;
-    right: 5px;
+    right: 10px;
+    bottom: 20px;
+    color: #444;
 }
 
 .ret {
