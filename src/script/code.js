@@ -18,7 +18,7 @@ $(function() {
   app.VIEW = Backbone.View.extend({
     events: {
         "click #add": "addItem",
-        "click .clickLabel": "clickLabel",
+        "click label": "clickLabel",
         "click #active": "activeBlock",
         "click #done": "doneBlock",
         "click #remove": "removeBlock",
@@ -143,7 +143,7 @@ $(function() {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       },this);
-      $('#ul li input').remove();
+    $('#ul li input').css({'display':'none'});
       $('#ul li label').removeClass('clickLabel');
 
     },
