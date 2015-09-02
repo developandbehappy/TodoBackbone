@@ -143,6 +143,7 @@ $(function() {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       },this);
+      $('#ul li input').remove();
     },
     deleteLabel: function(e) {
       var elId = e.toElement.parentElement.children[0].id;
