@@ -147,16 +147,16 @@ $(function() {
       var elId = e.toElement.parentElement.children[0].id;
       this.collection.at(elId).set('status','delete');
       this.collection.at(elId).set('ico','fa-history');
+      this.collection.at(elId).set('check','');
       this.addStorage();
-      console.log('Было удаленно задание! ->' + this.collection.at(elId).get('title'));
+      console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
     },
     returnLabel: function(e) {
       var elId = e.toElement.parentElement.children[0].id;
-      this.collection.at(elId).set('status','active');
+      this.collection.at(elId).set('status','act');
       this.collection.at(elId).set('ico','fa-times');
       this.addStorage();
-      console.log('Было возвращенно задание ->' + this.collection.at(elId).get('title'));
-    
+      console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));    
     }
   });
   
