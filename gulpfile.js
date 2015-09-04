@@ -1,10 +1,16 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
+var eslint = require('gulp-eslint');
 
-
-gulp.task('test', function() {
-	process.exit(1);
+gulp.task('eslint', function() {
+	return gulp.src(['src/script/*.js'])
+	       .pipe(eslint())
+	       .pipe(eslint.format())
+	       .pipe(eslint.failOnError());
 });
+
+
+gulp.task('test', ['eslint']);
 
 gulp.task('connect', function () {
 	return browserSync.init({
@@ -20,4 +26,4 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.task('default',['connect']);
+gulp.task('default',['test']);

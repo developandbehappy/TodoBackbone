@@ -5,7 +5,8 @@
   "main": "gulpfile.js",
   "devDependencies": {
     "browser-sync": "^2.8.2",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0"
   },
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js test"
