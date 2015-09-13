@@ -2,6 +2,8 @@ var app = app || {};
 var StorageHelper = StorageHelper || {};
 var Backbone = Backbone || {};
 var _ = _ || {};
+var collection = collection || undefined;
+var view = view || undefined;
 
 $(function () {
   app.Model = Backbone.Model.extend({
@@ -141,7 +143,6 @@ $(function () {
       }, this);
       $('#ul li input').css({'display': 'none'});
       $('#ul li label').removeClass('clickLabel');
-
     },
     deleteLabel: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
