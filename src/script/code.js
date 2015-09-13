@@ -3,7 +3,7 @@ var StorageHelper = StorageHelper || {};
 var Backbone = Backbone || {};
 var _ = _ || {};
 
-$(function() {
+$(function () {
   app.Model = Backbone.Model.extend({
     defaults: {
       title: '',
@@ -25,13 +25,13 @@ $(function() {
       'click #act': 'deleteLabel',
       'click #delete': 'returnLabel'
     },
-    template: _.template( $('#template').html() ),
-    initialize: function() {
+    template: _.template($('#template').html()),
+    initialize: function () {
       this.setCollect();
       this.renderTodo();
       this.render();
     },
-    render: function() {
+    render: function () {
       if (window.location.hash === '#active') {
         this.activeBlock();
       } else if (window.location.hash === '#done') {
@@ -42,19 +42,19 @@ $(function() {
         return true;
       }
     },
-    renderTodo: function() {
-      if (localStorage.getItem('todo') === null || localStorage.getItem('todo').length === 0 ) {
+    renderTodo: function () {
+      if (localStorage.getItem('todo') === null || localStorage.getItem('todo').length === 0) {
         localStorage.setItem('todo', '[]');
       } else {
         $('#ul li').remove();
-        this.getStorage().forEach(function(data) {
+        this.getStorage().forEach(function (data) {
           this.$('#ul').append(this.template(data));
         }, this);
         console.log('Получил все данные со стореджа!');
         console.log(this.getStorage());
       }
     },
-    addItem: function() {
+    addItem: function () {
       var $text = $('#text');
       var textVal = $text.val();
       var textLength = textVal.length;
@@ -82,7 +82,7 @@ $(function() {
         }
       }
     },
-    addStorage: function() {
+    addStorage: function () {
       if (!StorageHelper.get('todo')) {
         this.setCollect();
         StorageHelper.setObject('todo', collection);
@@ -90,13 +90,13 @@ $(function() {
         StorageHelper.setObject('todo', collection);
       }
     },
-    getStorage: function() {
+    getStorage: function () {
       return StorageHelper.get('todo');
     },
-    setCollect: function() {
+    setCollect: function () {
       return collection.add(StorageHelper.get('todo')) || false;
     },
-    clickLabel: function(e) {
+    clickLabel: function (e) {
       var elId = e.toElement.control.id;
       if (this.collection.at(elId).get('check') !== 'checked') {
         this.collection.at(elId).set('check', 'checked');
@@ -111,39 +111,39 @@ $(function() {
       this.initialize();
       // console.log(e);
     },
-    activeBlock: function() {
+    activeBlock: function () {
       console.log('active!');
       $('#ul li').remove();
-      this.collection.each(function(col) {
+      this.collection.each(function (col) {
         if (col.get('check') !== 'checked' && col.get('status') !== 'delete') {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       }, this);
     },
-    doneBlock: function() {
+    doneBlock: function () {
       console.log('done!');
       $('#ul li').remove();
-      this.collection.each(function(col) {
+      this.collection.each(function (col) {
         if (col.get('check') === 'checked' && col.get('status') !== 'delete') {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       }, this);
-      $('ul li label').css({'color':'#000'});
-      $('ul li label').css({'text-decoration':'line-through'});
+      $('ul li label').css({'color': '#000'});
+      $('ul li label').css({'text-decoration': 'line-through'});
     },
-    removeBlock: function() {
+    removeBlock: function () {
       console.log('remove!');
       $('#ul li').remove();
-      this.collection.each(function(col) {
+      this.collection.each(function (col) {
         if (col.get('status') === 'delete') {
           this.$('#ul').append(this.template(col.toJSON()));
         }
       }, this);
-    $('#ul li input').css({'display':'none'});
+      $('#ul li input').css({'display': 'none'});
       $('#ul li label').removeClass('clickLabel');
 
     },
-    deleteLabel: function(e) {
+    deleteLabel: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
       this.collection.at(elId).set('status', 'delete');
       this.collection.at(elId).set('ico', 'fa-history');
@@ -152,16 +152,16 @@ $(function() {
       this.initialize();
       console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
     },
-    returnLabel: function(e) {
+    returnLabel: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
       this.collection.at(elId).set('status', 'act');
       this.collection.at(elId).set('ico', 'fa-times');
       this.addStorage();
       this.initialize();
-      console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));    
+      console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));
     }
   });
-  
+
   collection = new app.COLLECTION();
 
   view = new app.VIEW({el: 'body', collection: collection});
