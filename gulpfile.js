@@ -26,4 +26,4 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.task('default',['eslint']);
+gulp.task('default',['connect']);
