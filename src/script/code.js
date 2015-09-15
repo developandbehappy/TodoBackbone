@@ -15,7 +15,18 @@ $(function () {
     }
   });
   // Модел данных которые будем отправлять в сторедж!
-  app.COLLECTION = Backbone.Collection.extend({model: app.Model});
+  app.COLLECTION = Backbone.Collection.extend({
+    model: app.Model,
+    sync: function(type) {
+      console.log('type is '+ type);
+      if(type === 'read') {
+        var todo = StorageHelper.get('todo');
+        console.log('todo-->', todo);
+      } else {
+        StorageHelper.setObject('todo',this.toJSON());
+      }
+    }
+  });
 
   app.VIEW = Backbone.View.extend({
     events: {
