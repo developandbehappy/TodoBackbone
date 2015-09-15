@@ -44,7 +44,7 @@ $(function () {
       });
       collection.sync();
       $('#text').val('');
-      $('li').remove();
+      $('#ul li').remove();
       this.render();
     },
     addCollection: function() {
@@ -54,7 +54,7 @@ $(function () {
     },
     template: _.template($('#template').html()),
     render: function() {
-       collection.sync('read').forEach(function (data) {
+       StorageHelper.get('todo').forEach(function (data) {
         this.$('#ul').append(this.template(data));
       }, this);
     }
