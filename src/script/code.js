@@ -32,7 +32,10 @@ $(function () {
   app.VIEW = Backbone.View.extend({
     events: {
       'click #add': 'addData',
-      'click li input': 'checkData'
+      'click li input': 'checkData',
+      'click #active': 'activeBlock',
+      'click #done': 'doneBlock',
+      'click #remove': 'removeBlock'
     },
     initialize: function() {
       this.addCollection();
@@ -62,11 +65,33 @@ $(function () {
     checkData: function(e) {
       var id = e.toElement.id;
       if(collection._byId[id].get("check") === 'checked') {
-        collection._byId[id].set({check:''});
+        collection._byId[id].set({
+          check:'',
+          status:'act'
+        });
       } else {
-      collection._byId[id].set({check:'checked'});
+        collection._byId[id].set({
+          check:'checked',
+          status:'done'
+        });
       }
       collection.sync();
+    },
+    activeBlock: function() {
+      $('#ul li').remove();
+      collection.forEach(function (data) {
+        if(data.get('status') === 'act') {
+          this.$('#ul').append(this.template(data.toJSON()));
+        }
+      }, this);
+    },
+    doneBlock: function() {
+      $('#ul li').remove();
+      console.log('done')
+    },
+    removeBlock: function() {
+      $('#ul li').remove();
+      console.log('remove')
     }
   });
 
