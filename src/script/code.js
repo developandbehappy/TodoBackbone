@@ -12,7 +12,7 @@ $(function () {
       title: '',
       status: 'act',
       check: '',
-      ico: 'fa-times'
+      ico: 'fa-times',
     }
   });
   // Модел данных которые будем отправлять в сторедж!
@@ -34,19 +34,27 @@ $(function () {
       'click #add': 'addData'
     },
     initialize: function() {
+      this.addCollection();
       this.render();
     },
     addData: function() {
       collection.add({
-        title: $('#text').val()
+        title: $('#text').val(),
+        id: StorageHelper.get('todo').length || 0
       });
       collection.sync();
       $('#text').val('')
     },
-    render: function() {
+    addCollection: function() {
       this.collection.push(
         collection.sync('read')
       );
+    },
+    template: _.template($('#template').html()),
+    render: function() {
+       collection.sync('read').forEach(function (data) {
+        this.$('#ul').append(this.template(data));
+      }, this);
     }
   });
 
