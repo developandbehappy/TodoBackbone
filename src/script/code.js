@@ -31,7 +31,8 @@ $(function () {
 
   app.VIEW = Backbone.View.extend({
     events: {
-      'click #add': 'addData'
+      'click #add': 'addData',
+      'click li input': 'checkData'
     },
     initialize: function() {
       this.addCollection();
@@ -57,6 +58,11 @@ $(function () {
        StorageHelper.get('todo').forEach(function (data) {
         this.$('#ul').append(this.template(data));
       }, this);
+    },
+    checkData: function(e) {
+      var id = e.toElement.id;
+      collection._byId[id].set({check:'checked'});
+      collection.sync();
     }
   });
 
