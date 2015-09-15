@@ -43,7 +43,9 @@ $(function () {
         id: StorageHelper.get('todo').length || 0
       });
       collection.sync();
-      $('#text').val('')
+      $('#text').val('');
+      $('li').remove();
+      this.render();
     },
     addCollection: function() {
       this.collection.push(
