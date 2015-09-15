@@ -61,7 +61,11 @@ $(function () {
     },
     checkData: function(e) {
       var id = e.toElement.id;
+      if(collection._byId[id].get("check") === 'checked') {
+        collection._byId[id].set({check:''});
+      } else {
       collection._byId[id].set({check:'checked'});
+      }
       collection.sync();
     }
   });
