@@ -87,11 +87,19 @@ $(function () {
     },
     doneBlock: function() {
       $('#ul li').remove();
-      console.log('done')
+      collection.forEach(function (data) {
+        if(data.get('status') === 'done') {
+          this.$('#ul').append(this.template(data.toJSON()));
+        }
+      }, this);
     },
     removeBlock: function() {
       $('#ul li').remove();
-      console.log('remove')
+      collection.forEach(function (data) {
+        if(data.get('status') === 'act') {
+          this.$('#ul').append(this.template(data.toJSON()));
+        }
+      }, this);
     }
   });
 
