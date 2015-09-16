@@ -37,7 +37,7 @@ $(function () {
       'click #done': 'doneBlock',
       'click #remove': 'removeBlock',
       'click .fa-times': 'deleteImg',
-      'click .fa-history': 'returnImg'
+      'click .fa-history': 'returnLabel'
     },
     initialize: function() {
       this.addCollection();
@@ -49,10 +49,10 @@ $(function () {
         title: $('#text').val(),
         id: StorageHelper.get('todo').length || 0
       });
-      collection.sync();
       $('#text').val('');
       $('#ul li').remove();
-      this.render();
+      this.renderTodo();
+      collection.sync();
     },
     addCollection: function() {
       this.collection.push(
@@ -71,7 +71,9 @@ $(function () {
         this.activeBlock();
       } else if(hash === '#done') {
         this.doneBlock();
-      }
+      } else if(hash === '#remove') {
+        this.removeBlock();
+      } 
     },
     checkData: function(e) {
       var id = e.toElement.id;
@@ -123,6 +125,14 @@ $(function () {
       this.renderTodo();
       collection.sync();
       console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
+    },
+    returnLabel: function (e) {
+      var elId = e.toElement.parentElement.children[0].id;
+      this.collection.at(elId).set('status', 'act');
+      this.collection.at(elId).set('ico', 'fa-times');
+      this.renderTodo();
+      collection.sync();
+      console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));
     }
   });
 
