@@ -5,6 +5,7 @@ var _ = _ || {};
 var collection = collection || undefined;
 var view = view || undefined;
 var todo = todo || undefined;
+var val = val || undefined;
 var valLength = valLength || undefined;
 
 $(function () {
@@ -53,7 +54,6 @@ $(function () {
           title: val,
           id: StorageHelper.get('todo').length || 0
         });
-        $('#text').val('');
         $('#ul li').remove();
         this.renderTodo();
         collection.sync();
@@ -64,6 +64,7 @@ $(function () {
       } else {
         $.notify('Вы не можете добавить это задание, возникла ошибка!');
       }
+      $('#text').val('');
     },
     addCollection: function() {
       this.collection.push(
