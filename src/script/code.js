@@ -47,7 +47,7 @@ $(function () {
       this.renderTodo();
     },
     addData: function() {
-      val = $.trim($('#text').val());
+      val = $.trim($('#text').val()).replace(/<[^>]+>/g,'');
       valLength = val.length;
       if (valLength > 0 && valLength <= 40) {
         collection.add({
