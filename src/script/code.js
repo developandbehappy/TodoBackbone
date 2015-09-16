@@ -12,20 +12,20 @@ $(function () {
       title: '',
       status: 'act',
       check: '',
-      ico: 'fa-times',
+      ico: 'fa-times'
     }
   });
   // Модел данных которые будем отправлять в сторедж!
   app.COLLECTION = Backbone.Collection.extend({
     model: app.Model,
     sync: function(type) {
-      var todo = StorageHelper.get('todo');
-      if(type === 'read') {
+      todo = StorageHelper.get('todo');
+      if (type === 'read') {
         console.log('Получил все данные со стореджа->', todo);
-        return todo;
       } else {
-        StorageHelper.setObject('todo',this.toJSON());
+        StorageHelper.setObject('todo', this.toJSON());
       }
+      return todo;
     }
   });
 
@@ -61,31 +61,31 @@ $(function () {
     },
     template: _.template($('#template').html()),
     render: function() {
-       StorageHelper.get('todo').forEach(function (data) {
-        this.$('#ul').append(this.template(data));
+      collection.forEach(function (data) {
+        this.$('#ul').append(this.template(data.toJSON()));
       }, this);
     },
     renderTodo: function() {
       var hash = window.location.hash;
-      if(hash === '#active') {
+      if (hash === '#active') {
         this.activeBlock();
-      } else if(hash === '#done') {
+      } else if (hash === '#done') {
         this.doneBlock();
-      } else if(hash === '#remove') {
+      } else if (hash === '#remove') {
         this.removeBlock();
-      } 
+      }
     },
     checkData: function(e) {
       var id = e.toElement.id;
-      if(collection._byId[id].get("check") === 'checked') {
+      if (collection._byId[id].get('check') === 'checked') {
         collection._byId[id].set({
-          check:'',
-          status:'act'
+          check: '',
+          status: 'act'
         });
       } else {
         collection._byId[id].set({
-          check:'checked',
-          status:'done'
+          check: 'checked',
+          status: 'done'
         });
       }
       collection.sync();
@@ -94,7 +94,7 @@ $(function () {
     activeBlock: function() {
       $('#ul li').remove();
       collection.forEach(function (data) {
-        if(data.get('status') === 'act') {
+        if (data.get('status') === 'act') {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
@@ -102,7 +102,7 @@ $(function () {
     doneBlock: function() {
       $('#ul li').remove();
       collection.forEach(function (data) {
-        if(data.get('status') === 'done') {
+        if (data.get('status') === 'done') {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
@@ -112,7 +112,7 @@ $(function () {
     removeBlock: function() {
       $('#ul li').remove();
       collection.forEach(function (data) {
-        if(data.get('status') === 'remove') {
+        if (data.get('status') === 'remove') {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
