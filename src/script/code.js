@@ -5,6 +5,7 @@ var _ = _ || {};
 var collection = collection || undefined;
 var view = view || undefined;
 var todo = todo || undefined;
+var valLength = valLength || undefined;
 
 $(function () {
   app.Model = Backbone.Model.extend({
@@ -45,14 +46,24 @@ $(function () {
       this.renderTodo();
     },
     addData: function() {
-      collection.add({
-        title: $('#text').val(),
-        id: StorageHelper.get('todo').length || 0
-      });
-      $('#text').val('');
-      $('#ul li').remove();
-      this.renderTodo();
-      collection.sync();
+      val = $.trim($('#text').val());
+      valLength = val.length;
+      if (valLength > 0 && valLength <= 40) {
+        collection.add({
+          title: val,
+          id: StorageHelper.get('todo').length || 0
+        });
+        $('#text').val('');
+        $('#ul li').remove();
+        this.renderTodo();
+        collection.sync();
+      } else if (valLength <= 0) {
+        $.notify('Вы не можете добавить пустое задание');
+      } else if (valLength >= 40) {
+        $.notify('Вы не можете добавить задание больше 40 символов!');
+      } else {
+        $.notify('Вы не можете добавить это задание, возникла ошибка!');
+      }
     },
     addCollection: function() {
       this.collection.push(
