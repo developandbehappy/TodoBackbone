@@ -106,8 +106,6 @@ $(function () {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
-      $('ul li label').css({'color': '#000'});
-      $('ul li label').css({'text-decoration': 'line-through'});
     },
     removeBlock: function() {
       $('#ul li').remove();

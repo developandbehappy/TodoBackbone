@@ -53,7 +53,6 @@ body {
 }
 
 #blockOne ul li label {
-  color: #fff;
   display: block;
   cursor: pointer;
   font-weight: 100;
@@ -125,4 +124,14 @@ body {
 
 .notifyjs-corner {
   font-size: 10px;
+}
+
+.done {
+  color: #000;
+  text-decoration: line-through;
+}
+
+.act {
+  color: #fff;
+  text-decoration: none;
 }
