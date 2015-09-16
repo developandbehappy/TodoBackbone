@@ -40,6 +40,7 @@ $(function () {
     initialize: function() {
       this.addCollection();
       this.render();
+      this.renderTodo();
     },
     addData: function() {
       collection.add({
@@ -62,6 +63,14 @@ $(function () {
         this.$('#ul').append(this.template(data));
       }, this);
     },
+    renderTodo: function() {
+      var hash = window.location.hash;
+      if(hash === '#active') {
+        this.activeBlock();
+      } else if(hash === '#done') {
+        this.doneBlock();
+      }
+    },
     checkData: function(e) {
       var id = e.toElement.id;
       if(collection._byId[id].get("check") === 'checked') {
@@ -76,6 +85,7 @@ $(function () {
         });
       }
       collection.sync();
+      this.renderTodo();
     },
     activeBlock: function() {
       $('#ul li').remove();
@@ -96,7 +106,7 @@ $(function () {
     removeBlock: function() {
       $('#ul li').remove();
       collection.forEach(function (data) {
-        if(data.get('status') === 'act') {
+        if(data.get('status') === 'remove') {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
