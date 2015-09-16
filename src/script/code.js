@@ -35,7 +35,8 @@ $(function () {
       'click li input': 'checkData',
       'click #active': 'activeBlock',
       'click #done': 'doneBlock',
-      'click #remove': 'removeBlock'
+      'click #remove': 'removeBlock',
+      'click i#act': 'deleteImg'
     },
     initialize: function() {
       this.addCollection();
@@ -110,6 +111,14 @@ $(function () {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
+    },
+    deleteImg: function(e) {
+      var elId = e.toElement.parentElement.children[0].id;
+      this.collection.at(elId).set('status', 'remove');
+      this.collection.at(elId).set('ico', 'fa-history');
+      this.collection.at(elId).set('check', '');
+      this.renderTodo();
+      collection.sync();
     }
   });
 
