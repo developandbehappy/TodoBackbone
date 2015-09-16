@@ -36,7 +36,8 @@ $(function () {
       'click #active': 'activeBlock',
       'click #done': 'doneBlock',
       'click #remove': 'removeBlock',
-      'click i#act': 'deleteImg'
+      'click .fa-times': 'deleteImg',
+      'click .fa-history': 'returnImg'
     },
     initialize: function() {
       this.addCollection();
@@ -111,6 +112,8 @@ $(function () {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
+      $('#ul li input').css({'display': 'none'});
+      $('#ul li label').removeClass('clickLabel');
     },
     deleteImg: function(e) {
       var elId = e.toElement.parentElement.children[0].id;
@@ -119,6 +122,7 @@ $(function () {
       this.collection.at(elId).set('check', '');
       this.renderTodo();
       collection.sync();
+      console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
     }
   });
 
