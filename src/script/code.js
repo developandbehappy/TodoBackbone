@@ -102,8 +102,8 @@ $(function () {
           check: '',
           status: 'act'
         });
-        $.notify('[' + collection._byId[id].get('title') + '] -> was checkout!');
-        console.log('[ ' + collection._byId[id].get('title') + ' ] was checkout')
+        $.notify('[' + collection._byId[id].get('title') + '] -> was unchecked!');
+        console.log('[ ' + collection._byId[id].get('title') + ' ] was unchecked');
       } else {
         if (!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
           collection._byId[id].set({
@@ -111,7 +111,7 @@ $(function () {
             status: 'done'
           });
           $.notify('[' + collection._byId[id].get('title') + '] -> was checked!', 'success');
-          console.log('[ ' + collection._byId[id].get('title') + ' ] was checked')
+          console.log('[ ' + collection._byId[id].get('title') + ' ] was checked');
         }
       }
       collection.sync();
