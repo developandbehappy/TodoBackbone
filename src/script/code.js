@@ -102,12 +102,14 @@ $(function () {
           check: '',
           status: 'act'
         });
+        $.notify(collection._byId[id].get('title') + ' было снято с выполненого задания');
       } else {
         if (!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
           collection._byId[id].set({
             check: 'checked',
             status: 'done'
           });
+          $.notify(collection._byId[id].get('title') + ' было выполненно!','success');
         }
       }
       collection.sync();
