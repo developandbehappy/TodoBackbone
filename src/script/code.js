@@ -102,7 +102,7 @@ $(function () {
           check: '',
           status: 'act'
         });
-        $.notify(collection._byId[id].get('title') + ' было снято с выполненого задания');
+        $.notify('[' + collection._byId[id].get('title') + '] -> was checkout!');
         console.log('[ ' + collection._byId[id].get('title') + ' ] was checkout')
       } else {
         if (!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
@@ -110,7 +110,7 @@ $(function () {
             check: 'checked',
             status: 'done'
           });
-          $.notify(collection._byId[id].get('title') + ' было выполненно!','success');
+          $.notify('[' + collection._byId[id].get('title') + '] -> was checked!', 'success');
           console.log('[ ' + collection._byId[id].get('title') + ' ] was checked')
         }
       }
