@@ -97,21 +97,24 @@ $(function () {
     },
     checkData: function(e) {
       var id = e.toElement.id;
-      if (collection._byId[id].get('check') === 'checked' && collection._byId[id].get('status') !== 'remove') {
+      var checkCol = collection._byId[id].get('check');
+      var statusCol = collection._byId[id].get('status');
+      var titleCol = collection._byId[id].get('title');
+      if (checkCol === 'checked' && statusCol !== 'remove') {
         collection._byId[id].set({
           check: '',
           status: 'act'
         });
-        $.notify('[' + collection._byId[id].get('title') + '] -> was unchecked!');
-        console.log('[ ' + collection._byId[id].get('title') + ' ] was unchecked');
+        $.notify('[' + titleCol + '] -> was unchecked!');
+        console.log('[ ' + titleCol + ' ] was unchecked');
       } else {
-        if (!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
+        if (!status === 'remove' || statusCol === 'act') {
           collection._byId[id].set({
             check: 'checked',
             status: 'done'
           });
-          $.notify('[' + collection._byId[id].get('title') + '] -> was checked!', 'success');
-          console.log('[ ' + collection._byId[id].get('title') + ' ] was checked');
+          $.notify('[' + titleCol + '] -> was checked!', 'success');
+          console.log('[ ' + titleCol + ' ] was checked');
         }
       }
       collection.sync();
