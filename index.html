@@ -33,9 +33,9 @@
 <script src="src/script/TodoStorage.js"></script>
 <script src="src/script/code.js"></script>
 <script id="template" type="text/template">
-<li>
+<li class="<%= status %>">
   <input type="checkbox" id="<%= id %>" <%= check %>>
-  <label for="<%= id %>" id="clickLabel" class="<%= status %>"> <%= title %> </label>
+  <label for="<%= id %>" class="<%= status %>"> <%= title %> </label>
     <i class="fa <%= ico %> imgMus" id="<%= status %>"></i>
 </li>
 </script>

@@ -43,6 +43,7 @@ $(function () {
       },
       'click #remove': function() {
         this.blockRend('remove');
+        $('#ul li label').removeClass('clickLabel');
       },
       'click .fa-times': 'deleteImg',
       'click .fa-history': 'returnLabel'
@@ -82,6 +83,7 @@ $(function () {
       collection.forEach(function (data) {
         this.$('#ul').append(this.template(data.toJSON()));
       }, this);
+      $('#ul.remove label').removeAttr('id','clickLabel');
     },
     renderTodo: function(status) {
       var hash = location.hash;
@@ -95,16 +97,18 @@ $(function () {
     },
     checkData: function(e) {
       var id = e.toElement.id;
-      if (collection._byId[id].get('check') === 'checked') {
+      if (collection._byId[id].get('check') === 'checked' && collection._byId[id].get('status') !== 'remove') {
         collection._byId[id].set({
           check: '',
           status: 'act'
         });
       } else {
-        collection._byId[id].set({
-          check: 'checked',
-          status: 'done'
-        });
+        if(!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
+          collection._byId[id].set({
+            check: 'checked',
+            status: 'done'
+          });
+        }
       }
       collection.sync();
       this.renderTodo();
