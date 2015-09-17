@@ -103,6 +103,7 @@ $(function () {
           status: 'act'
         });
         $.notify(collection._byId[id].get('title') + ' было снято с выполненого задания');
+        console.log('[ ' + collection._byId[id].get('title') + ' ] was checkout')
       } else {
         if (!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
           collection._byId[id].set({
@@ -110,6 +111,7 @@ $(function () {
             status: 'done'
           });
           $.notify(collection._byId[id].get('title') + ' было выполненно!','success');
+          console.log('[ ' + collection._byId[id].get('title') + ' ] was checked')
         }
       }
       collection.sync();
