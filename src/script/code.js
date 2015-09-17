@@ -54,7 +54,7 @@ $(function () {
       this.renderTodo();
     },
     addData: function() {
-      val = $.trim($('#text').val()).replace(/<[^>]+>/g,'');
+      val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
       valLength = val.length;
       if (valLength > 0 && valLength <= 40) {
         collection.add({
@@ -83,9 +83,9 @@ $(function () {
       collection.forEach(function (data) {
         this.$('#ul').append(this.template(data.toJSON()));
       }, this);
-      $('#ul.remove label').removeAttr('id','clickLabel');
+      $('#ul.remove label').removeAttr('id', 'clickLabel');
     },
-    renderTodo: function(status) {
+    renderTodo: function() {
       var hash = location.hash;
       if (hash === '#active') {
         this.blockRend('act');
@@ -103,7 +103,7 @@ $(function () {
           status: 'act'
         });
       } else {
-        if(!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
+        if (!collection._byId[id].get('status') === 'remove' || collection._byId[id].get('status') === 'act') {
           collection._byId[id].set({
             check: 'checked',
             status: 'done'
@@ -115,12 +115,12 @@ $(function () {
     },
     blockRend: function(status) {
       $('#ul li').remove();
-      if(status) {
+      if (status) {
         collection.forEach(function (data) {
-        if (data.get('status') === status) {
-          this.$('#ul').append(this.template(data.toJSON()));
-        }
-      }, this);
+          if (data.get('status') === status) {
+            this.$('#ul').append(this.template(data.toJSON()));
+          }
+        }, this);
       }
     },
     deleteImg: function(e) {
