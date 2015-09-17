@@ -35,9 +35,15 @@ $(function () {
     events: {
       'click #add': 'addData',
       'click li input': 'checkData',
-      'click #active': 'activeBlock',
-      'click #done': 'doneBlock',
-      'click #remove': 'removeBlock',
+      'click #active': function() {
+        this.blockRend('act');
+      },
+      'click #done': function() {
+        this.blockRend('done');
+      },
+      'click #remove': function() {
+        this.blockRend('remove');
+      },
       'click .fa-times': 'deleteImg',
       'click .fa-history': 'returnLabel'
     },
@@ -77,14 +83,14 @@ $(function () {
         this.$('#ul').append(this.template(data.toJSON()));
       }, this);
     },
-    renderTodo: function() {
-      var hash = window.location.hash;
+    renderTodo: function(status) {
+      var hash = location.hash;
       if (hash === '#active') {
-        this.activeBlock();
+        this.blockRend('act');
       } else if (hash === '#done') {
-        this.doneBlock();
+        this.blockRend('done');
       } else if (hash === '#remove') {
-        this.removeBlock();
+        this.blockRend('remove');
       }
     },
     checkData: function(e) {
@@ -103,31 +109,15 @@ $(function () {
       collection.sync();
       this.renderTodo();
     },
-    activeBlock: function() {
+    blockRend: function(status) {
       $('#ul li').remove();
-      collection.forEach(function (data) {
-        if (data.get('status') === 'act') {
+      if(status) {
+        collection.forEach(function (data) {
+        if (data.get('status') === status) {
           this.$('#ul').append(this.template(data.toJSON()));
         }
       }, this);
-    },
-    doneBlock: function() {
-      $('#ul li').remove();
-      collection.forEach(function (data) {
-        if (data.get('status') === 'done') {
-          this.$('#ul').append(this.template(data.toJSON()));
-        }
-      }, this);
-    },
-    removeBlock: function() {
-      $('#ul li').remove();
-      collection.forEach(function (data) {
-        if (data.get('status') === 'remove') {
-          this.$('#ul').append(this.template(data.toJSON()));
-        }
-      }, this);
-      $('#ul li input').css({'display': 'none'});
-      $('#ul li label').removeClass('clickLabel');
+      }
     },
     deleteImg: function(e) {
       var elId = e.toElement.parentElement.children[0].id;
