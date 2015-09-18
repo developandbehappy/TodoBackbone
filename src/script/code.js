@@ -117,8 +117,9 @@ $(function () {
           console.log('[ ' + titleCol + ' ] was checked');
         }
       }
+      $('#ul li').remove();
       collection.sync();
-      this.renderTodo();
+      this.initialize();
     },
     blockRend: function(status) {
       $('#ul li').remove();
@@ -138,6 +139,8 @@ $(function () {
       this.renderTodo();
       collection.sync();
       console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
+      $('#ul li').remove();
+      this.initialize();
     },
     returnLabel: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
@@ -146,6 +149,8 @@ $(function () {
       this.renderTodo();
       collection.sync();
       console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));
+      $('#ul li').remove();
+      this.initialize();
     }
   });
 
