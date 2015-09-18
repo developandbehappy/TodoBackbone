@@ -62,7 +62,8 @@ $(function () {
           id: StorageHelper.get('todo').length || 0
         });
         $('#ul li').remove();
-        this.initialize();
+        this.render();
+      this.renderTodo();
         collection.sync();
       } else if (valLength <= 0) {
         $.notify('Вы не можете добавить пустое задание');
@@ -119,7 +120,8 @@ $(function () {
       }
       $('#ul li').remove();
       collection.sync();
-      this.initialize();
+      this.render();
+      this.renderTodo();
     },
     blockRend: function(status) {
       $('#ul li').remove();
@@ -140,7 +142,8 @@ $(function () {
       collection.sync();
       console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
       $('#ul li').remove();
-      this.initialize();
+      this.render();
+      this.renderTodo();
     },
     returnLabel: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
@@ -150,7 +153,8 @@ $(function () {
       collection.sync();
       console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));
       $('#ul li').remove();
-      this.initialize();
+      this.render();
+      this.renderTodo();
     }
   });
 
