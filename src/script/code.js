@@ -64,6 +64,7 @@ $(function () {
         $('#ul li').remove();
         this.render();
         this.renderTodo();
+        location.href = '.';
         collection.sync();
       } else if (valLength <= 0) {
         $.notify('Вы не можете добавить пустое задание');
