@@ -61,9 +61,9 @@ $(function () {
           title: val,
           id: StorageHelper.get('todo').length || 0
         });
-      $('#ul li').remove();
-      this.initialize();
-      collection.sync();
+        $('#ul li').remove();
+        this.initialize();
+        collection.sync();
       } else if (valLength <= 0) {
         $.notify('Вы не можете добавить пустое задание');
       } else if (valLength >= 40) {
@@ -72,7 +72,6 @@ $(function () {
         $.notify('Вы не можете добавить это задание, возникла ошибка!');
       }
       $('#text').val('');
-
     },
     addCollection: function() {
       this.collection.push(
