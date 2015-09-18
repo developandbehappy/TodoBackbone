@@ -20,7 +20,7 @@ $(function () {
   // Модел данных которые будем отправлять в сторедж!
   app.COLLECTION = Backbone.Collection.extend({
     model: app.Model,
-    sync: function(type) {
+    sync: function (type) {
       todo = StorageHelper.get('todo');
       if (type === 'read') {
         console.log('Получил все данные со стореджа->', todo);
@@ -35,25 +35,25 @@ $(function () {
     events: {
       'click #add': 'addData',
       'click li input': 'checkData',
-      'click #active': function() {
+      'click #active': function () {
         this.blockRend('act');
       },
-      'click #done': function() {
+      'click #done': function () {
         this.blockRend('done');
       },
-      'click #remove': function() {
+      'click #remove': function () {
         this.blockRend('remove');
         $('#ul li label').removeClass('clickLabel');
       },
       'click .fa-times': 'deleteImg',
       'click .fa-history': 'returnLabel'
     },
-    initialize: function() {
+    initialize: function () {
       this.addCollection();
       this.render();
       this.renderTodo();
     },
-    addData: function() {
+    addData: function () {
       val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
       valLength = val.length;
       if (valLength > 0 && valLength <= 40) {
@@ -75,19 +75,19 @@ $(function () {
       }
       $('#text').val('');
     },
-    addCollection: function() {
+    addCollection: function () {
       this.collection.push(
         collection.sync('read')
       );
     },
     template: _.template($('#template').html()),
-    render: function() {
+    render: function () {
       collection.forEach(function (data) {
         this.$('#ul').append(this.template(data.toJSON()));
       }, this);
       $('#ul.remove label').removeAttr('id', 'clickLabel');
     },
-    renderTodo: function() {
+    renderTodo: function () {
       var hash = location.hash;
       if (hash === '#active') {
         this.blockRend('act');
@@ -97,7 +97,7 @@ $(function () {
         this.blockRend('remove');
       }
     },
-    checkData: function(e) {
+    checkData: function (e) {
       var id = e.toElement.id;
       var checkCol = collection._byId[id].get('check');
       var statusCol = collection._byId[id].get('status');
@@ -124,7 +124,7 @@ $(function () {
       this.render();
       this.renderTodo();
     },
-    blockRend: function(status) {
+    blockRend: function (status) {
       $('#ul li').remove();
       if (status) {
         collection.forEach(function (data) {
@@ -134,7 +134,7 @@ $(function () {
         }, this);
       }
     },
-    deleteImg: function(e) {
+    deleteImg: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
       this.collection.at(elId).set('status', 'remove');
       this.collection.at(elId).set('ico', 'fa-history');
@@ -163,4 +163,3 @@ $(function () {
 
   view = new app.VIEW({el: 'body', collection: collection});
 });
-

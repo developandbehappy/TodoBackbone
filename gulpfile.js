@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
+var jscs = require('gulp-jscs');
 
 gulp.task('eslint', function() {
 	return gulp.src(['src/script/*.js'])
@@ -10,7 +11,12 @@ gulp.task('eslint', function() {
 });
 
 
-gulp.task('test', ['eslint']);
+gulp.task('test', ['eslint', 'jscs']);
+
+gulp.task('jscs', function () {
+      gulp.src('src/script/*.js')
+        .pipe(jscs());
+});
 
 gulp.task('connect', function () {
 	return browserSync.init({
