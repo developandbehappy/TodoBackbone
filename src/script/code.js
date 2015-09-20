@@ -2,11 +2,7 @@ var app = app || {};
 var StorageHelper = StorageHelper || {};
 var Backbone = Backbone || {};
 var _ = _ || {};
-var collection = collection || undefined;
-var view = view || undefined;
-var todo = todo || undefined;
-var val = val || undefined;
-var valLength = valLength || undefined;
+
 
 $(function () {
   app.Model = Backbone.Model.extend({
@@ -21,7 +17,7 @@ $(function () {
   app.COLLECTION = Backbone.Collection.extend({
     model: app.Model,
     sync: function (type) {
-      todo = StorageHelper.get('todo');
+      var todo = StorageHelper.get('todo');
       if (type === 'read') {
         console.log('Получил все данные со стореджа->', todo);
       } else {
@@ -30,8 +26,12 @@ $(function () {
       return todo;
     }
   });
+  
+  var collection = new app.COLLECTION();
 
   app.VIEW = Backbone.View.extend({
+    el: 'body',
+    collection: collection,
     events: {
       'click #add': 'addData',
       'click li input': 'checkData',
@@ -54,8 +54,8 @@ $(function () {
       this.renderTodo();
     },
     addData: function () {
-      val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
-      valLength = val.length;
+      var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
+      var valLength = val.length;
       if (valLength > 0 && valLength <= 40) {
         collection.add({
           title: val,
@@ -163,7 +163,5 @@ $(function () {
     }
   });
 
-  collection = new app.COLLECTION();
-
-  view = new app.VIEW({el: 'body', collection: collection});
+  var view = new app.VIEW();
 });
