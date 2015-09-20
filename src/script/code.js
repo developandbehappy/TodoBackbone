@@ -2,10 +2,10 @@ var app = app || {};
 var StorageHelper = StorageHelper || {};
 var Backbone = Backbone || {};
 var _ = _ || {};
-var collection = collection || undefined;
-var view = view || undefined;
 
 $(function () {
+  var collection = collection || undefined;
+  var view = view || undefined;
   app.Model = Backbone.Model.extend({
     defaults: {
       title: '',
