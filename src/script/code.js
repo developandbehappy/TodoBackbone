@@ -82,7 +82,7 @@ $(function () {
     template: _.template($('#template').html()),
     render: function () {
       collection.forEach(function (data) {
-        this.$('#ul').append(this.template(data.toJSON()));
+        $('#ul').append(this.template(data.toJSON()));
       }, this);
       $('#ul.remove label').removeAttr('id', 'clickLabel');
     },
