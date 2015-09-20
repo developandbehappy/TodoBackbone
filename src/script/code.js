@@ -2,7 +2,8 @@ var app = app || {};
 var StorageHelper = StorageHelper || {};
 var Backbone = Backbone || {};
 var _ = _ || {};
-
+var collection = collection || undefined;
+var view = view || undefined;
 
 $(function () {
   app.Model = Backbone.Model.extend({
@@ -26,8 +27,7 @@ $(function () {
       return todo;
     }
   });
-  
-  var collection = new app.COLLECTION();
+  collection = new app.COLLECTION();
 
   app.VIEW = Backbone.View.extend({
     el: 'body',
@@ -162,6 +162,5 @@ $(function () {
       return $('#ul li').remove();
     }
   });
-
-  var view = new app.VIEW();
+  view = new app.VIEW();
 });
