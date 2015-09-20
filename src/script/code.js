@@ -2,6 +2,11 @@ var app = app || {};
 var StorageHelper = StorageHelper || {};
 var Backbone = Backbone || {};
 var _ = _ || {};
+var collection = collection || undefined;
+var view = view || undefined;
+var todo = todo || undefined;
+var val = val || undefined;
+var valLength = valLength || undefined;
 
 $(function () {
   app.Model = Backbone.Model.extend({
