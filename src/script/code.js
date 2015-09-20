@@ -61,10 +61,9 @@ $(function () {
           title: val,
           id: StorageHelper.get('todo').length || 0
         });
-        $('#ul li').remove();
+        this.removeTags();
         this.render();
         this.renderTodo();
-        location.href = '.';
         collection.sync();
       } else if (valLength <= 0) {
         $.notify('Вы не можете добавить пустое задание');
@@ -87,14 +86,16 @@ $(function () {
       }, this);
       $('#ul.remove label').removeAttr('id', 'clickLabel');
     },
-    renderTodo: function () {
+    renderTodo: function (e) {
       var hash = location.hash;
-      if (hash === '#active') {
+      if (hash === '#active' && !e) {
         this.blockRend('act');
-      } else if (hash === '#done') {
+      } else if (hash === '#done' && !e) {
         this.blockRend('done');
-      } else if (hash === '#remove') {
+      } else if (hash === '#remove' && !e) {
         this.blockRend('remove');
+      } else if (e) {
+        return true;
       }
     },
     checkData: function (e) {
@@ -119,13 +120,13 @@ $(function () {
           console.log('[ ' + titleCol + ' ] was checked');
         }
       }
-      $('#ul li').remove();
+      this.removeTags();
       collection.sync();
       this.render();
       this.renderTodo();
     },
     blockRend: function (status) {
-      $('#ul li').remove();
+      this.removeTags();
       if (status) {
         collection.forEach(function (data) {
           if (data.get('status') === status) {
@@ -142,7 +143,7 @@ $(function () {
       this.renderTodo();
       collection.sync();
       console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
-      $('#ul li').remove();
+      this.removeTags();
       this.render();
       this.renderTodo();
     },
@@ -153,9 +154,12 @@ $(function () {
       this.renderTodo();
       collection.sync();
       console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));
-      $('#ul li').remove();
+      this.removeTags();
       this.render();
       this.renderTodo();
+    },
+    removeTags: function () {
+      return $('#ul li').remove();
     }
   });
 
