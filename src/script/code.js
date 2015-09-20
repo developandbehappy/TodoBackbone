@@ -127,33 +127,33 @@ $(function () {
     },
     blockRend: function (status) {
       this.removeTags();
-      if (status) {
-        collection.forEach(function (data) {
-          if (data.get('status') === status) {
-            this.$('#ul').append(this.template(data.toJSON()));
-          }
-        }, this);
-      }
+      collection.forEach(function (data) {
+        if (data.get('status') === status) {
+          this.$('#ul').append(this.template(data.toJSON()));
+        }
+      }, this);
     },
     deleteImg: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
-      this.collection.at(elId).set('status', 'remove');
-      this.collection.at(elId).set('ico', 'fa-history');
-      this.collection.at(elId).set('check', '');
+      var colEl = this.collection.at(elId);
+      colEl.set('status', 'remove');
+      colEl.set('ico', 'fa-history');
+      colEl.set('check', '');
       this.renderTodo();
       collection.sync();
-      console.log('Было удаленно задание! -> ' + this.collection.at(elId).get('title'));
+      console.log('Было удаленно задание! -> ' + colEl.get('title'));
       this.removeTags();
       this.render();
       this.renderTodo();
     },
     returnLabel: function (e) {
       var elId = e.toElement.parentElement.children[0].id;
-      this.collection.at(elId).set('status', 'act');
-      this.collection.at(elId).set('ico', 'fa-times');
+      var colEl = this.collection.at(elId);
+      colEl.set('status', 'act');
+      colEl.set('ico', 'fa-times');
       this.renderTodo();
       collection.sync();
-      console.log('Было возвращенно задание -> ' + this.collection.at(elId).get('title'));
+      console.log('Было возвращенно задание -> ' + colEl.get('title'));
       this.removeTags();
       this.render();
       this.renderTodo();
