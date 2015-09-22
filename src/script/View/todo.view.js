@@ -1,7 +1,11 @@
 var app = app || {};
+var Backbone = Backbone || {};
+var StorageHelper = StorageHelper || {};
+var _ = _ || {};
 
-
-app.VIEW = Backbone.View.extend({
+$(function () {
+  var collection = new app.COLLECTION();
+  app.VIEW = Backbone.View.extend({
     el: 'body',
     collection: collection,
     events: {
@@ -134,3 +138,4 @@ app.VIEW = Backbone.View.extend({
       return $('#ul li').remove();
     }
   });
+});

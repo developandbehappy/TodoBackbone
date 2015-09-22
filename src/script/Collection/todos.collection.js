@@ -1,4 +1,6 @@
-  var app = app || {};
+var app = app || {};
+var Backbone = Backbone || {};
+var StorageHelper = StorageHelper || {};
 
 $(function () {
   app.COLLECTION = Backbone.Collection.extend({
@@ -13,4 +15,4 @@ $(function () {
       return todo;
     }
   });
-  });
+});

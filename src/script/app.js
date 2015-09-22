@@ -5,6 +5,5 @@ $(function () {
   var view = view || undefined;
 
   collection = new app.COLLECTION();
-  
   view = new app.VIEW();
 });

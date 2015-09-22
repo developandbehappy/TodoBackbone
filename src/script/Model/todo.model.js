@@ -1,7 +1,8 @@
 var app = app || {};
+var Backbone = Backbone || {};
 
-
-app.Model = Backbone.Model.extend({
+$(function () {
+  app.Model = Backbone.Model.extend({
     defaults: {
       title: '',
       status: 'act',
@@ -9,3 +10,4 @@ app.Model = Backbone.Model.extend({
       ico: 'fa-times'
     }
   });
+});
