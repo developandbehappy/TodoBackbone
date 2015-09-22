@@ -4,10 +4,10 @@ var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
 $(function () {
-  var collection = new app.COLLECTION();
+  var newCollection = new app.COLLECTION();
   app.VIEW = Backbone.View.extend({
     el: 'body',
-    collection: collection,
+    collection: newCollection,
     events: {
       'click #add': 'addData',
       'click li input': 'checkData',
@@ -52,12 +52,12 @@ $(function () {
     },
     addCollection: function () {
       this.collection.push(
-        collection.sync('read')
+        newCollection.sync('read')
       );
     },
     template: _.template($('#template').html()),
     render: function () {
-      collection.forEach(function (data) {
+      newCollection.forEach(function (data) {
         $('#ul').append(this.template(data.toJSON()));
       }, this);
       $('#ul.remove label').removeAttr('id', 'clickLabel');
@@ -103,7 +103,7 @@ $(function () {
     },
     blockRend: function (status) {
       this.removeTags();
-      collection.forEach(function (data) {
+      newCollection.forEach(function (data) {
         if (data.get('status') === status) {
           this.$('#ul').append(this.template(data.toJSON()));
         }
