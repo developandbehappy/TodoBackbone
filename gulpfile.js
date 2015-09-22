@@ -4,7 +4,8 @@ var eslint = require('gulp-eslint');
 var jscs = require('gulp-jscs');
 
 gulp.task('eslint', function() {
-	return gulp.src(['src/script/*/*.js'])
+	return gulp.src(['src/script/*.js',
+					'src/script/*/*.js'])
 	       .pipe(eslint())
 	       .pipe(eslint.format())
 	       .pipe(eslint.failOnError());
@@ -32,4 +33,4 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.task('default',['connect']);
+gulp.task('default',['test']);
