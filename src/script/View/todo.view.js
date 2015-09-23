@@ -33,14 +33,14 @@ $(function () {
       var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
       var valLength = val.length;
       if (valLength > 0 && valLength <= 40) {
-        collection.add({
+        this.collection.add({
           title: val,
           id: StorageHelper.get('todo').length || 0
         });
         this.removeTags();
         this.render();
         this.renderTodo();
-        collection.sync();
+        this.collection.sync();
       } else if (valLength <= 0) {
         $.notify('Вы не можете добавить пустое задание');
       } else if (valLength >= 40) {
@@ -76,11 +76,11 @@ $(function () {
     },
     checkData: function (e) {
       var id = e.toElement.id;
-      var checkCol = collection._byId[id].get('check');
-      var statusCol = collection._byId[id].get('status');
-      var titleCol = collection._byId[id].get('title');
+      var checkCol = this.collection._byId[id].get('check');
+      var statusCol = this.collection._byId[id].get('status');
+      var titleCol = this.collection._byId[id].get('title');
       if (checkCol === 'checked' && statusCol !== 'remove') {
-        collection._byId[id].set({
+        this.collection._byId[id].set({
           check: '',
           status: 'act'
         });
@@ -88,7 +88,7 @@ $(function () {
         console.log('[ ' + titleCol + ' ] was unchecked');
       } else {
         if (!status === 'remove' || statusCol === 'act') {
-          collection._byId[id].set({
+          this.collection._byId[id].set({
             check: 'checked',
             status: 'done'
           });
@@ -97,7 +97,7 @@ $(function () {
         }
       }
       this.removeTags();
-      collection.sync();
+      this.collection.sync();
       this.render();
       this.renderTodo();
     },
@@ -116,7 +116,7 @@ $(function () {
       colEl.set('ico', 'fa-history');
       colEl.set('check', '');
       this.renderTodo();
-      collection.sync();
+      this.collection.sync();
       console.log('Было удаленно задание! -> ' + colEl.get('title'));
       this.removeTags();
       this.render();
@@ -128,7 +128,7 @@ $(function () {
       colEl.set('status', 'act');
       colEl.set('ico', 'fa-times');
       this.renderTodo();
-      collection.sync();
+      this.collection.sync();
       console.log('Было возвращенно задание -> ' + colEl.get('title'));
       this.removeTags();
       this.render();

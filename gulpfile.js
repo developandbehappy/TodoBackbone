@@ -15,7 +15,8 @@ gulp.task('eslint', function() {
 gulp.task('test', ['eslint', 'jscs']);
 
 gulp.task('jscs', function () {
-      gulp.src('src/script/*/*.js')
+      gulp.src(['src/script/*.js',
+				'src/script/*/*.js'])
         .pipe(jscs());
 });
 
@@ -33,4 +34,4 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.task('default',['test']);
+gulp.task('default',['connect']);
