@@ -64,11 +64,11 @@ $(function () {
     },
     renderTodo: function (e) {
       var hash = location.hash;
-      if (hash === '#active' && !e) {
+      if (hash === '#/active' && !e) {
         this.blockRend('act');
-      } else if (hash === '#done' && !e) {
+      } else if (hash === '#/done' && !e) {
         this.blockRend('done');
-      } else if (hash === '#remove' && !e) {
+      } else if (hash === '#/remove' && !e) {
         this.blockRend('remove');
       } else if (e) {
         return true;
