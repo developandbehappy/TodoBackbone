@@ -25,7 +25,8 @@ gulp.task('connect', function () {
 		files: [
 			'index.html',
 			'src/style/*.css',
-			'src/script/*/*.js'
+			'src/script/*/*.js',
+			'src/script/*.js'
 		],
 		port: 3000,
 		logConnections: true,

@@ -4,7 +4,7 @@ var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
 $(function () {
-  var newCollection = new app.COLLECTION();
+  newCollection = new app.COLLECTION();
   app.VIEW = Backbone.View.extend({
     el: 'body',
     collection: newCollection,
