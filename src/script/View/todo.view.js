@@ -33,14 +33,14 @@ $(function () {
       var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
       var valLength = val.length;
       if (valLength > 0 && valLength <= 40) {
-        collection.add({
+        this.collection.add({
           title: val,
           id: StorageHelper.get('todo').length || 0
         });
         this.removeTags();
         this.render();
         this.renderTodo();
-        collection.sync();
+        this.collection.sync();
       } else if (valLength <= 0) {
         $.notify('Вы не можете добавить пустое задание');
       } else if (valLength >= 40) {
