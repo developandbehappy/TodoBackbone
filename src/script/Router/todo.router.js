@@ -1,4 +1,5 @@
 var app = app || {};
+var Backbone=Backbone || {};
 
 app.Router = Backbone.Router.extend({
 	routes: {
@@ -11,7 +12,3 @@ app.Router = Backbone.Router.extend({
 	}
 });
 
-(function(){
-	new app.Router();
-	Backbone.history.start();
-});
