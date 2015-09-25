@@ -1,9 +1,7 @@
 var app = app || {};
+var Backbone = Backbone || {};
 
 $(function () {
-  // newCollection = new app.COLLECTION();
-  // view = new app.VIEW({
-  // 	el: 'body',
-  // 	collection: newCollection
-  // });
+	new app.Router();
+	Backbone.history.start();
 });
