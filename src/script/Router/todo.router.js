@@ -3,11 +3,11 @@ var Backbone=Backbone || {};
 
 app.Router = Backbone.Router.extend({
 	routes: {
-		':hash' : 'action'
+		'' : 'home',
 	},
-	action: function (hash) {
+	home: function () {
 		new app.View({
-			state:hash
+			state: 'active'
 		});
 	}
 });
