@@ -26,7 +26,8 @@ app.View = Backbone.View.extend({
     'click .fa-times': 'deleteImg',
     'click .fa-history': 'returnLabel'
   },
-  initialize: function () {
+  initialize: function (hash) {
+    this.hash = hash;
     console.log('%c initialize', 'background: #000; color: #fff');
     this.template = _.template($('#template').html());
     this.addCollection();
@@ -66,12 +67,12 @@ app.View = Backbone.View.extend({
     $('#ul.remove label').removeAttr('id', 'clickLabel');
   },
   renderTodo: function (e) {
-    var hash = location.hash;
-    if (hash === '#/active' && !e) {
+    var hash = this.hash.state;
+    if (hash === 'active' && !e) {
       this.blockRend('act');
-    } else if (hash === '#/done' && !e) {
+    } else if (hash === 'done' && !e) {
       this.blockRend('done');
-    } else if (hash === '#/remove' && !e) {
+    } else if (hash === 'remove' && !e) {
       this.blockRend('remove');
     } else if (e) {
       return true;
