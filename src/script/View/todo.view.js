@@ -3,9 +3,13 @@ var Backbone = Backbone || {};
 var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
+
+var collect = new app.COLLECTION();
+
+
 app.View = Backbone.View.extend({
   el: 'body',
-  collection: app.COLLECTION,
+  collection: collect,
   events: {
     'click #add': 'addData',
     'click li input': 'checkData',
@@ -23,7 +27,7 @@ app.View = Backbone.View.extend({
     'click .fa-history': 'returnLabel'
   },
   initialize: function () {
-    console.log('%c initialize', 'background: #000; color: #f90');
+    console.log('%c initialize', 'background: #000; color: #fff');
     this.template = _.template($('#template').html());
     this.addCollection();
     this.render();
@@ -52,11 +56,11 @@ app.View = Backbone.View.extend({
   },
   addCollection: function () {
     this.collection.push(
-      newCollection.sync('read')
+      this.collection.sync('read')
     );
   },
   render: function () {
-    newCollection.forEach(function (data) {
+    this.collection.forEach(function (data) {
       $('#ul').append(this.template(data.toJSON()));
     }, this);
     $('#ul.remove label').removeAttr('id', 'clickLabel');
@@ -102,7 +106,7 @@ app.View = Backbone.View.extend({
   },
   blockRend: function (status) {
     this.removeTags();
-    newCollection.forEach(function (data) {
+    this.collection.forEach(function (data) {
       if (data.get('status') === status) {
         this.$('#ul').append(this.template(data.toJSON()));
       }

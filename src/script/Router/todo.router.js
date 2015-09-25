@@ -1,5 +1,5 @@
 var app = app || {};
-var Backbone=Backbone || {};
+var Backbone = Backbone || {};
 
 app.Router = Backbone.Router.extend({
 	routes: {
