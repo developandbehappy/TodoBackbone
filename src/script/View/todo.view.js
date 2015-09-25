@@ -23,6 +23,8 @@ app.View = Backbone.View.extend({
     'click .fa-history': 'returnLabel'
   },
   initialize: function () {
+    console.log('%c initialize', 'background: #000; color: #f90');
+    this.template = _.template($('#template').html());
     this.addCollection();
     this.render();
     this.renderTodo();
@@ -53,7 +55,6 @@ app.View = Backbone.View.extend({
       newCollection.sync('read')
     );
   },
-  template: _.template($('#template').html()),
   render: function () {
     newCollection.forEach(function (data) {
       $('#ul').append(this.template(data.toJSON()));
