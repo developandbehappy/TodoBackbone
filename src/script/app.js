@@ -1,5 +1,9 @@
 var app = app || {};
 
 $(function () {
-  app.view = new app.VIEW();
+  // newCollection = new app.COLLECTION();
+  // view = new app.VIEW({
+  // 	el: 'body',
+  // 	collection: newCollection
+  // });
 });

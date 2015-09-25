@@ -1,14 +1,17 @@
 var app = app || {};
 
+app.Router = Backbone.Router.extend({
+	routes: {
+		':hash' : 'action'
+	},
+	action: function (hash) {
+		new app.View({
+			state:hash
+		});
+	}
+});
+
 (function(){
-	app.Router = Backbone.Router.extend({
-		routes: {
-			':hash' : 'action'
-		},
-		action: function (hash) {
-			console.log(hash + ' hello world');
-		}
-	});
 	new app.Router();
 	Backbone.history.start();
-})();
+});
