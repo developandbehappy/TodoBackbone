@@ -31,7 +31,6 @@ app.View = Backbone.View.extend({
     this.template = _.template($('#template').html());
     this.addCollection();
     this.render();
-    this.renderTodo();
   },
   addData: function () {
     var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');

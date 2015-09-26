@@ -2,6 +2,6 @@ var app = app || {};
 var Backbone = Backbone || {};
 
 $(function () {
-	new app.Router();
-	Backbone.history.start();
+  app.router = new app.Router();
+  Backbone.history.start();
 });
