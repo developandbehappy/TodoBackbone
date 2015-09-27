@@ -4,7 +4,7 @@ var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
 
-var collect = new app.COLLECTION();
+var collect = new app.COLLECTION({},{validate: true});
 
 
 app.View = Backbone.View.extend({
@@ -27,7 +27,6 @@ app.View = Backbone.View.extend({
     'click .fa-history': 'returnLabel'
   },
   initialize: function () {
-    console.log('%c initialize', 'background: #000; color: #fff');
     this.template = _.template($('#template').html());
     this.addCollection();
     this.render();
