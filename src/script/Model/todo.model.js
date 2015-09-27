@@ -2,27 +2,32 @@ var app = app || {};
 var Backbone = Backbone || {};
 
 app.Model = Backbone.Model.extend({
+	initialize: function () {
+		this.validate();
+	},
 	defaults: {
 		title: '',
 		status: 'act',
 		check: '',
 		ico: 'fa-times'
 	},
-	initialize: function () {
-		this.on('error', function(model,error) {
-			console.log(error);
-		});
-	},
-	validate: function (attrs, options) {
-		validate = true;
-		if (attrs.title.length < 0 || attrs.title.length > 40) {
-			return 'Неверная длина задачи!';
-		} 
-		if (attrs.status !== 'act' || attrs.status !== 'done' || attrs.status !== 'remove') {
-			return 'статус не может быть ' + attrs.status;
-		} 
-		if (attrs.check !== '' || attrs.check !== 'checked') {
-			return 'атрибут чек не может иметь это значение!';
+	validate: function () {
+		var modJS = this.toJSON();
+		var checkJSON = modJS.check;
+		var titleJSON = modJS.title;
+		var statJSON = modJS.status;
+		if (checkJSON !== '' && checkJSON !== 'checked') {
+			console.log('check не может быть -> ' + checkJSON);
+			return false;
+		} else if (titleJSON.length > 40) {
+			console.log('Длина title не может быть > 40 ');
+			return false;
+		} else if (statJSON !== 'act' && statJSON !== 'done' && statJSON !== 'remove') {
+			console.log('status задания не может быть ' + statJSON);
+			return false;
+		} else {
+			console.log('Ваши данные валидны!');
+			return true;
 		}
 	}
 });

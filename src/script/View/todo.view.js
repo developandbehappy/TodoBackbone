@@ -4,7 +4,7 @@ var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
 
-var collect = new app.COLLECTION({},{validate: true});
+var collect = new app.COLLECTION();
 
 
 app.View = Backbone.View.extend({
