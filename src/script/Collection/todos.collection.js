@@ -14,15 +14,11 @@ app.COLLECTION = Backbone.Collection.extend({
     return todo;
   },
   validate: function (text) {
-    console.log(text);
     if (text.length >= 40) {
       $.notify('Вы не можете добавить задание больше 40 символов!');
-      console.log('Длина title не может быть > 40 ');
-      return false;
+      console.log('Длина имени не может быть > 40 ');
     } else if (text.length <= 0) {
       $.notify('Вы не можете добавить пустое задание');
-      console.log('status задания не может быть ' + statJSON);
-      return false;
     } else {
       console.log('Ваши данные валидны!');
       this.add({
