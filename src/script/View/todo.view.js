@@ -33,23 +33,7 @@ app.View = Backbone.View.extend({
   },
   addData: function () {
     var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
-    var valLength = val.length;
-    if (valLength > 0 && valLength <= 40) {
-      this.collection.add({
-        title: val,
-        id: StorageHelper.get('todo').length || 0
-      });
-      this.removeTags();
-      this.render();
-      this.renderTodo();
-      this.collection.sync();
-    } else if (valLength <= 0) {
-      $.notify('Вы не можете добавить пустое задание');
-    } else if (valLength >= 40) {
-      $.notify('Вы не можете добавить задание больше 40 символов!');
-    } else {
-      $.notify('Вы не можете добавить это задание, возникла ошибка!');
-    }
+    this.collection.validate(val);
     $('#text').val('');
   },
   addCollection: function () {
