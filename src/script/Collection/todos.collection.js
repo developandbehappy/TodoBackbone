@@ -12,24 +12,6 @@ app.COLLECTION = Backbone.Collection.extend({
       StorageHelper.setObject('todo', this.toJSON());
     }
     return todo;
-  },
-  validate: function (text) {
-    if (text.length >= 40) {
-      $.notify('Вы не можете добавить задание больше 40 символов!');
-      console.log('Длина имени не может быть > 40 ');
-    } else if (text.length <= 0) {
-      $.notify('Вы не можете добавить пустое задание');
-    } else {
-      console.log('Ваши данные валидны!');
-      this.add({
-        title: text,
-        id: StorageHelper.get('todo').length || 0
-      });
-      this.sync();
-      app.view.removeTags();
-      app.view.render();
-      app.view.renderTodo();
-    }
   }
 });
 

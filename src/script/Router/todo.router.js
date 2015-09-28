@@ -6,13 +6,9 @@ app.Router = Backbone.Router.extend({
     app.view = new app.View();
   },
   routes: {
-    '': 'home',
     'active': 'active',
     'done': 'done',
     'remove': 'remove'
-  },
-  home: function () {
-    return true;
   },
   active: function () {
     app.view.blockRend('act');

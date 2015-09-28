@@ -33,7 +33,10 @@ app.View = Backbone.View.extend({
   },
   addData: function () {
     var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
-    this.collection.validate(val);
+    app.model.validate(val);
+    this.removeTags();
+    this.render();
+    this.renderTodo();
     $('#text').val('');
   },
   addCollection: function () {
@@ -49,11 +52,11 @@ app.View = Backbone.View.extend({
   },
   renderTodo: function (e) {
     var hash = location.hash;
-    if (hash === '#/active' && !e) {
+    if (hash === '#/active') {
       this.blockRend('act');
-    } else if (hash === '#/done' && !e) {
+    } else if (hash === '#/done') {
       this.blockRend('done');
-    } else if (hash === '#/remove' && !e) {
+    } else if (hash === '#/remove') {
       this.blockRend('remove');
     } else if (e) {
       return true;
