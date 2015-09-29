@@ -27,13 +27,16 @@ app.View = Backbone.View.extend({
     'click .fa-history': 'returnLabel'
   },
   initialize: function () {
+    this.collection.on('error', function(model, error) {
+      $.notify(error);
+    });
     this.template = _.template($('#template').html());
     this.addCollection();
     this.render();
   },
   addData: function () {
     var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
-    app.model.validate(val);
+    this.collection.validate(val);
     this.removeTags();
     this.render();
     this.renderTodo();

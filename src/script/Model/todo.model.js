@@ -2,6 +2,11 @@ var app = app || {};
 var Backbone = Backbone || {};
 
 app.Model = Backbone.Model.extend({
+  initialize: function() {
+    this.on('invalid', function(model, error) {
+      $.notify(error);
+    });
+  },
   defaults: {
     title: '',
     status: 'act',
@@ -21,8 +26,5 @@ app.Model = Backbone.Model.extend({
       });
       this.sync();
     }
-  },
-  this.on('invalid', function(model, error) {
-    $.notify(error);
-  });
+  }
 });
