@@ -14,8 +14,7 @@ app.Model = Backbone.Model.extend({
     } else if (val.title.length <= 0) {
       return 'Вы не можете добавить пустое задание';
     } else {
-      console.log('Ваши данные валидны!');
-      $.notify('Добавленно новое задание [' + val.title + ']', 'success');
+      console.log('Добавленно новое задание -> ' + val.title);
     }
   }
 });

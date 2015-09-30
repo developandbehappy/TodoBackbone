@@ -6,7 +6,7 @@ app.COLLECTION = Backbone.Collection.extend({
   model: app.Model,
   initialize: function() {
     this.on('invalid', function(model, error) {
-      $.notify(error);
+      console.log(error);
     });
   },
   sync: function (type) {
