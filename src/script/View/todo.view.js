@@ -5,6 +5,7 @@ var _ = _ || {};
 
 
 var collect = new app.COLLECTION();
+var model = new app.Model();
 
 
 app.View = Backbone.View.extend({
@@ -27,16 +28,17 @@ app.View = Backbone.View.extend({
     'click .fa-history': 'returnLabel'
   },
   initialize: function () {
-    this.collection.on('error', function(model, error) {
-      $.notify(error);
-    });
     this.template = _.template($('#template').html());
     this.addCollection();
     this.render();
   },
   addData: function () {
     var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
-    this.collection.validate(val);
+    collect.add({
+      title: val,
+      id: StorageHelper.get('todo').length || 0
+    }, {validate: true});
+    collect.sync();
     this.removeTags();
     this.render();
     this.renderTodo();
