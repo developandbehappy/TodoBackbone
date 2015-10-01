@@ -5,7 +5,6 @@ var _ = _ || {};
 
 
 var collect = new app.COLLECTION();
-var model = new app.Model();
 
 
 app.View = Backbone.View.extend({
@@ -29,8 +28,8 @@ app.View = Backbone.View.extend({
   },
   initialize: function () {
     this.template = _.template($('#template').html());
-    collect.bind('invalid', function(model, error) {
-      $.notify(error)
+    collect.bind('invalid', function (model, error) {
+      $.notify(error);
     });
     this.addCollection();
     this.render();

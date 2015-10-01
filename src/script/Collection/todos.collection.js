@@ -4,8 +4,8 @@ var StorageHelper = StorageHelper || {};
 
 app.COLLECTION = Backbone.Collection.extend({
   model: app.Model,
-  initialize: function() {
-    this.on('invalid', function(model, error) {
+  initialize: function () {
+    this.on('invalid', function (model, error) {
       console.log(error);
     });
   },
