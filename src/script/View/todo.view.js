@@ -29,6 +29,9 @@ app.View = Backbone.View.extend({
   },
   initialize: function () {
     this.template = _.template($('#template').html());
+    collect.bind('invalid', function(model, error) {
+      $.notify(error)
+    });
     this.addCollection();
     this.render();
   },
@@ -38,9 +41,6 @@ app.View = Backbone.View.extend({
       title: val,
       id: StorageHelper.get('todo').length || 0
     }, {validate: true});
-    if (!model.isValid()) {
-      console.log();
-    }
     collect.sync();
     this.removeTags();
     this.render();

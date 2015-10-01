@@ -19,5 +19,3 @@ app.COLLECTION = Backbone.Collection.extend({
     return todo;
   }
 });
-
-
