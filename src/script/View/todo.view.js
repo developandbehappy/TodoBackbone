@@ -14,7 +14,7 @@ app.View = Backbone.View.extend({
     'click #add': 'addData',
     'click li input': 'checkData',
     'click #active': function () {
-      this.blockRend('act');
+      this.blockRend('active');
     },
     'click #done': function () {
       this.blockRend('done');
@@ -57,17 +57,9 @@ app.View = Backbone.View.extend({
     }, this);
     $('#ul.remove label').removeAttr('id', 'clickLabel');
   },
-  renderTodo: function (e) {
+  renderTodo: function () {
     var hash = location.hash;
-    if (hash === '#/active') {
-      this.blockRend('act');
-    } else if (hash === '#/done') {
-      this.blockRend('done');
-    } else if (hash === '#/remove') {
-      this.blockRend('remove');
-    } else if (e) {
-      return true;
-    }
+    this.blockRend(hash);
   },
   checkData: function (e) {
     var id = e.toElement.id;
@@ -77,12 +69,12 @@ app.View = Backbone.View.extend({
     if (checkCol === 'checked' && statusCol !== 'remove') {
       this.collection._byId[id].set({
         check: '',
-        status: 'act'
+        status: 'active'
       });
       $.notify('[' + titleCol + '] -> was unchecked!');
       console.log('[ ' + titleCol + ' ] was unchecked');
     } else {
-      if (!status === 'remove' || statusCol === 'act') {
+      if (!status === 'remove' || statusCol === 'active') {
         this.collection._byId[id].set({
           check: 'checked',
           status: 'done'
@@ -103,6 +95,7 @@ app.View = Backbone.View.extend({
         this.$('#ul').append(this.template(data.toJSON()));
       }
     }, this);
+
   },
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
@@ -120,7 +113,7 @@ app.View = Backbone.View.extend({
   returnLabel: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
     var colEl = this.collection.at(elId);
-    colEl.set('status', 'act');
+    colEl.set('status', 'active');
     colEl.set('ico', 'fa-times');
     this.renderTodo();
     this.collection.sync();

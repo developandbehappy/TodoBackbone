@@ -11,7 +11,7 @@ app.Router = Backbone.Router.extend({
     'remove': 'remove'
   },
   active: function () {
-    app.view.blockRend('act');
+    app.view.blockRend('active');
   },
   done: function () {
     app.view.blockRend('done');

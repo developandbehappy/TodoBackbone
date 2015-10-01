@@ -4,7 +4,7 @@ var Backbone = Backbone || {};
 app.Model = Backbone.Model.extend({
   defaults: {
     title: '',
-    status: 'act',
+    status: 'active',
     check: '',
     ico: 'fa-times'
   },
