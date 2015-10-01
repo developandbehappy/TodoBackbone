@@ -95,7 +95,6 @@ app.View = Backbone.View.extend({
         this.$('#ul').append(this.template(data.toJSON()));
       }
     }, this);
-
   },
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
