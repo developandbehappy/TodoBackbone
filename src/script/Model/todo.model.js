@@ -8,12 +8,19 @@ app.Model = Backbone.Model.extend({
     check: '',
     ico: 'fa-times'
   },
+  parse: function (response) {
+    console.log('[model] parse', response);
+    response.title = response.title.trim().replace(/<[^>]+>/g, '');
+    return response;
+  },
   validate: function (val) {
-    if (val.title.length >= 40) {
-      return 'Вы не можете добавить задание больше 40 символов!';
-    } else if (val.title.length <= 0) {
+    console.log('[model] validate', val);
+    var titleLength = val.title.length;
+    if (!titleLength) {
       return 'Вы не можете добавить пустое задание';
     }
-    console.log('Добавленно новое задание -> ' + val.title);
+    if (titleLength >= 40) {
+      return 'Вы не можете добавить задание больше 40 символов!';
+    }
   }
 });

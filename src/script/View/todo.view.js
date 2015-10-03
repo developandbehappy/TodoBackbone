@@ -3,9 +3,7 @@ var Backbone = Backbone || {};
 var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
-
-var collect = new app.COLLECTION();
-
+var collect = new app.collection();
 
 app.View = Backbone.View.extend({
   el: 'body',
@@ -13,43 +11,36 @@ app.View = Backbone.View.extend({
   events: {
     'click #add': 'addData',
     'click li input': 'checkData',
-    'click #active': function () {
-      this.blockRend('active');
-    },
-    'click #done': function () {
-      this.blockRend('done');
-    },
-    'click #remove': function () {
-      this.blockRend('remove');
-      $('#ul li label').removeClass('clickLabel');
-    },
     'click .fa-times': 'deleteImg',
     'click .fa-history': 'returnLabel'
   },
   initialize: function () {
     this.template = _.template($('#template').html());
-    collect.bind('invalid', function (model, error) {
-      $.notify(error);
-    });
-    this.addCollection();
+    this.collection.sync('read');
     this.render();
   },
   addData: function () {
-    var val = $.trim($('#text').val()).replace(/<[^>]+>/g, '');
-    collect.add({
-      title: val,
+    var obj = {
+      title: this.getVal(),
       id: StorageHelper.get('todo').length || 0
-    }, {validate: true});
+    };
+    var validate = collect.isValidModel(obj);
+    if (!validate.status) {
+      $.notify(validate.error);
+      return false;
+    }
+    collect.add(obj, {parse: true});
     collect.sync();
     this.removeTags();
     this.render();
     this.renderTodo();
-    $('#text').val('');
+    this.clearVal();
   },
-  addCollection: function () {
-    this.collection.push(
-      this.collection.sync('read')
-    );
+  getVal() {
+    return $('#text').val();
+  },
+  clearVal() {
+    return $('#text').val('');
   },
   render: function () {
     this.collection.forEach(function (data) {
@@ -59,13 +50,18 @@ app.View = Backbone.View.extend({
   },
   renderTodo: function () {
     var hash = location.hash;
-    this.blockRend(hash);
+    console.log('hash', hash);
+    this.blockRend(hash.substring(2));
   },
   checkData: function (e) {
     var id = e.toElement.id;
+    console.log('this.collection._byId[id]', this.collection._byId[id]);
     var checkCol = this.collection._byId[id].get('check');
     var statusCol = this.collection._byId[id].get('status');
     var titleCol = this.collection._byId[id].get('title');
+    console.log('checkCol', checkCol);
+    console.log('statusCol', statusCol);
+    console.log('titleCol', titleCol);
     if (checkCol === 'checked' && statusCol !== 'remove') {
       this.collection._byId[id].set({
         check: '',
@@ -122,6 +118,6 @@ app.View = Backbone.View.extend({
     this.renderTodo();
   },
   removeTags: function () {
-    return $('#ul li').remove();
+    return $('#ul').find('li').remove();
   }
 });
