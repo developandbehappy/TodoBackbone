@@ -10,7 +10,7 @@ app.View = Backbone.View.extend({
   collection: collect,
   events: {
     'click #add': 'addData',
-    'click li input': 'checkData',
+    'click .someJob': 'checkData',
     'click .fa-times': 'deleteImg',
     'click .fa-history': 'returnLabel'
   },
