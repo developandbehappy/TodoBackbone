@@ -33,7 +33,6 @@ app.View = Backbone.View.extend({
     collect.sync();
     this.removeTags();
     this.render();
-    this.renderTodo();
     this.clearVal();
   },
   getVal() {
@@ -47,6 +46,7 @@ app.View = Backbone.View.extend({
       $('#ul').append(this.template(data.toJSON()));
     }, this);
     $('#ul.remove label').removeAttr('id', 'clickLabel');
+    this.renderTodo();
   },
   renderTodo: function () {
     var hash = location.hash;
@@ -82,7 +82,6 @@ app.View = Backbone.View.extend({
     this.removeTags();
     this.collection.sync();
     this.render();
-    this.renderTodo();
   },
   blockRend: function (status) {
     this.removeTags();
@@ -98,24 +97,20 @@ app.View = Backbone.View.extend({
     colEl.set('status', 'remove');
     colEl.set('ico', 'fa-history');
     colEl.set('check', '');
-    this.renderTodo();
     this.collection.sync();
     console.log('Было удаленно задание! -> ' + colEl.get('title'));
     this.removeTags();
     this.render();
-    this.renderTodo();
   },
   returnLabel: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
     var colEl = this.collection.at(elId);
     colEl.set('status', 'active');
     colEl.set('ico', 'fa-times');
-    this.renderTodo();
     this.collection.sync();
     console.log('Было возвращенно задание -> ' + colEl.get('title'));
     this.removeTags();
     this.render();
-    this.renderTodo();
   },
   removeTags: function () {
     return $('#ul').find('li').remove();
