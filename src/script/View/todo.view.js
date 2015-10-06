@@ -59,6 +59,9 @@ app.View = Backbone.View.extend({
   unCheck: function (element) {
     return element.set({check: 'checked', status: 'done'});
   },
+  toRemove: function (element) {
+    return element.set({'status': 'remove', 'ico': 'fa-history', 'check': ''});
+  },
   checkData: function (e) {
     var id = e.toElement.id;
     var colEl = this.collection._byId[id];
@@ -91,9 +94,7 @@ app.View = Backbone.View.extend({
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
     var colEl = this.collection.at(elId);
-    colEl.set('status', 'remove');
-    colEl.set('ico', 'fa-history');
-    colEl.set('check', '');
+    this.toRemove(colEl);
     this.collection.sync();
     console.log('Было удаленно задание! -> ' + colEl.get('title'));
     this.removeTags();
