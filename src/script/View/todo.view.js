@@ -51,31 +51,27 @@ app.View = Backbone.View.extend({
   },
   renderTodo: function () {
     var hash = location.hash;
-    console.log('hash', hash);
     this.blockRend(hash.substring(2));
+  },
+  check: function (element) {
+    return element.set({check: '', status: 'active'});
+  },
+  unCheck: function (element) {
+    return element.set({check: 'checked', status: 'done'});
   },
   checkData: function (e) {
     var id = e.toElement.id;
-    console.log('this.collection._byId[id]', this.collection._byId[id]);
-    var checkCol = this.collection._byId[id].get('check');
-    var statusCol = this.collection._byId[id].get('status');
-    var titleCol = this.collection._byId[id].get('title');
-    console.log('checkCol', checkCol);
-    console.log('statusCol', statusCol);
-    console.log('titleCol', titleCol);
+    var colEl = this.collection._byId[id];
+    var checkCol = colEl.get('check');
+    var statusCol = colEl.get('status');
+    var titleCol = colEl.get('title');
     if (checkCol === 'checked' && statusCol !== 'remove') {
-      this.collection._byId[id].set({
-        check: '',
-        status: 'active'
-      });
+      this.check(colEl);
       $.notify('[' + titleCol + '] -> was unchecked!');
       console.log('[ ' + titleCol + ' ] was unchecked');
     } else {
       if (!status === 'remove' || statusCol === 'active') {
-        this.collection._byId[id].set({
-          check: 'checked',
-          status: 'done'
-        });
+        this.unCheck(colEl);
         $.notify('[' + titleCol + '] -> was checked!', 'success');
         console.log('[ ' + titleCol + ' ] was checked');
       }
