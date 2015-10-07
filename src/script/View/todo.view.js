@@ -34,7 +34,7 @@ app.View = Backbone.View.extend({
     collect.add(obj, {parse: true});
     collect.sync();
     this.removeTags();
-    this.render();
+    this.initialize();
     this.clearVal();
   },
   getVal() {
@@ -57,23 +57,24 @@ app.View = Backbone.View.extend({
   checkData: function (e) {
     var id = e.toElement.id;
     var colEl = this.collection._byId[id];
+    var colModel = this.collection._byId[id].model;
     var checkCol = colEl.get('check');
     var statusCol = colEl.get('status');
     var titleCol = colEl.get('title');
     if (checkCol === 'checked' && statusCol !== 'remove') {
-      model.check(colEl);
+      colEl.check();
       $.notify('[' + titleCol + '] -> was unchecked!');
       console.log('[ ' + titleCol + ' ] was unchecked');
     } else {
       if (!status === 'remove' || statusCol === 'active') {
-        model.unCheck(colEl);
+        colEl.unCheck();
         $.notify('[' + titleCol + '] -> was checked!', 'success');
         console.log('[ ' + titleCol + ' ] was checked');
       }
     }
     this.removeTags();
     this.collection.sync();
-    this.render();
+    this.initialize();
   },
   blockRend: function (status) {
     this.removeTags();
@@ -86,11 +87,11 @@ app.View = Backbone.View.extend({
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
     var colEl = this.collection.at(elId);
-    model.toRemove(colEl);
+    colEl.model.toRemove();
     this.collection.sync();
     console.log('Было удаленно задание! -> ' + colEl.get('title'));
     this.removeTags();
-    this.render();
+    this.initialize();
   },
   returnLabel: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
@@ -100,7 +101,7 @@ app.View = Backbone.View.extend({
     this.collection.sync();
     console.log('Было возвращенно задание -> ' + colEl.get('title'));
     this.removeTags();
-    this.render();
+    this.initialize();
   },
   removeTags: function () {
     return $('#ul').find('li').remove();
