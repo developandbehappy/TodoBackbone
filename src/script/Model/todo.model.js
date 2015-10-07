@@ -22,5 +22,14 @@ app.Model = Backbone.Model.extend({
     if (titleLength >= 40) {
       return 'Вы не можете добавить задание больше 40 символов!';
     }
-  }
+  },
+  check: function (element) {
+    return element.set({check: '', status: 'active'});
+  },
+  unCheck: function (element) {
+    return element.set({check: 'checked', status: 'done'});
+  },
+  toRemove: function (element) {
+    return element.set({'status': 'remove', 'ico': 'fa-history', 'check': ''});
+  },
 });

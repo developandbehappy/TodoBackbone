@@ -4,6 +4,7 @@ var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
 var collect = new app.collection();
+var model = new app.Model();
 
 app.View = Backbone.View.extend({
   el: 'body',
@@ -53,15 +54,6 @@ app.View = Backbone.View.extend({
     var hash = location.hash;
     this.blockRend(hash.substring(2));
   },
-  check: function (element) {
-    return element.set({check: '', status: 'active'});
-  },
-  unCheck: function (element) {
-    return element.set({check: 'checked', status: 'done'});
-  },
-  toRemove: function (element) {
-    return element.set({'status': 'remove', 'ico': 'fa-history', 'check': ''});
-  },
   checkData: function (e) {
     var id = e.toElement.id;
     var colEl = this.collection._byId[id];
@@ -69,12 +61,12 @@ app.View = Backbone.View.extend({
     var statusCol = colEl.get('status');
     var titleCol = colEl.get('title');
     if (checkCol === 'checked' && statusCol !== 'remove') {
-      this.check(colEl);
+      model.check(colEl);
       $.notify('[' + titleCol + '] -> was unchecked!');
       console.log('[ ' + titleCol + ' ] was unchecked');
     } else {
       if (!status === 'remove' || statusCol === 'active') {
-        this.unCheck(colEl);
+        model.unCheck(colEl);
         $.notify('[' + titleCol + '] -> was checked!', 'success');
         console.log('[ ' + titleCol + ' ] was checked');
       }
@@ -94,7 +86,7 @@ app.View = Backbone.View.extend({
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
     var colEl = this.collection.at(elId);
-    this.toRemove(colEl);
+    model.toRemove(colEl);
     this.collection.sync();
     console.log('Было удаленно задание! -> ' + colEl.get('title'));
     this.removeTags();
