@@ -8,9 +8,9 @@ app.collection = Backbone.Collection.extend({
     console.log('[collection] initialize');
   },
   sync: function (type) {
+    console.log('[collection] sync', type);
     var todo = StorageHelper.get('todo');
     if (type === 'read') {
-      console.log('[collection] sync', type);
       this.push(todo);
       console.log('Получил все данные со стореджа->', todo);
     } else {

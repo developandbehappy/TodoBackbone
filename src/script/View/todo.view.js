@@ -62,7 +62,7 @@ app.View = Backbone.View.extend({
     var titleCol = colEl.get('title');
     colEl.checkOrUncheck();
     this.removeTags();
-    this.collection.sync();
+    this.collection.sync('set');
     this.render();
   },
   blockRend: function (status) {
@@ -77,7 +77,7 @@ app.View = Backbone.View.extend({
     var elId = e.toElement.parentElement.children[0].id;
     var colEl = this.collection.at(elId);
     colEl.toRemove();
-    this.collection.sync();
+    this.collection.sync('set');
     console.log('Было удаленно задание! -> ' + colEl.get('title'));
     this.removeTags();
     this.render();
@@ -87,7 +87,7 @@ app.View = Backbone.View.extend({
     var colEl = this.collection.at(elId);
     colEl.set('status', 'active');
     colEl.set('ico', 'fa-times');
-    this.collection.sync();
+    this.collection.sync('set');
     console.log('Было возвращенно задание -> ' + colEl.get('title'));
     this.removeTags();
     this.render();
