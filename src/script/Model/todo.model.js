@@ -23,13 +23,20 @@ app.Model = Backbone.Model.extend({
       return 'Вы не можете добавить задание больше 40 символов!';
     }
   },
-  check: function () {
-    return this.set({check: '', status: 'active'});
+  checkOrUncheck: function () {
+    return this.get('check') === 'checked' && this.get('status') !== 'remove' ? this.checkIn() : this.checkOut();
   },
-  unCheck: function () {
+  checkIn: function () {
+    return this.set({check: '', status: 'active'});
+    $.notify('[' + titleCol + '] -> was unchecked!');
+    console.log('[ ' + titleCol + ' ] was unchecked');
+  },
+  checkOut: function () {
     return this.set({check: 'checked', status: 'done'});
+    $.notify('[' + titleCol + '] -> was checked!', 'success');
+    console.log('[ ' + titleCol + ' ] was checked');
   },
   toRemove: function () {
     return this.set({'status': 'remove', 'ico': 'fa-history', 'check': ''});
-  },
+  }
 });

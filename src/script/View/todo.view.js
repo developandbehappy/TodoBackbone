@@ -57,21 +57,11 @@ app.View = Backbone.View.extend({
   checkData: function (e) {
     var id = e.toElement.id;
     var colEl = this.collection._byId[id];
-    var colModel = this.collection._byId[id].model;
     var checkCol = colEl.get('check');
     var statusCol = colEl.get('status');
     var titleCol = colEl.get('title');
-    if (checkCol === 'checked' && statusCol !== 'remove') {
-      colEl.check();
-      $.notify('[' + titleCol + '] -> was unchecked!');
-      console.log('[ ' + titleCol + ' ] was unchecked');
-    } else {
-      if (!status === 'remove' || statusCol === 'active') {
-        colEl.unCheck();
-        $.notify('[' + titleCol + '] -> was checked!', 'success');
-        console.log('[ ' + titleCol + ' ] was checked');
-      }
-    }
+    colEl.checkOrUncheck();
+    console.log();
     this.removeTags();
     this.collection.sync();
     this.initialize();
