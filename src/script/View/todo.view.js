@@ -34,7 +34,7 @@ app.View = Backbone.View.extend({
     collect.add(obj, {parse: true});
     collect.sync();
     this.removeTags();
-    this.initialize();
+    this.render();
     this.clearVal();
   },
   getVal() {
@@ -64,7 +64,7 @@ app.View = Backbone.View.extend({
     console.log();
     this.removeTags();
     this.collection.sync();
-    this.initialize();
+    this.render();
   },
   blockRend: function (status) {
     this.removeTags();
@@ -77,11 +77,11 @@ app.View = Backbone.View.extend({
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
     var colEl = this.collection.at(elId);
-    colEl.model.toRemove();
+    colEl.toRemove();
     this.collection.sync();
     console.log('Было удаленно задание! -> ' + colEl.get('title'));
     this.removeTags();
-    this.initialize();
+    this.render();
   },
   returnLabel: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
@@ -91,7 +91,7 @@ app.View = Backbone.View.extend({
     this.collection.sync();
     console.log('Было возвращенно задание -> ' + colEl.get('title'));
     this.removeTags();
-    this.initialize();
+    this.render();
   },
   removeTags: function () {
     return $('#ul').find('li').remove();

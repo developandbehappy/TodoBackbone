@@ -8,7 +8,6 @@ app.collection = Backbone.Collection.extend({
     console.log('[collection] initialize');
   },
   sync: function (type) {
-    console.log('[collection] sync', type);
     var todo = StorageHelper.get('todo');
     if (type === 'read') {
       this.push(todo);
