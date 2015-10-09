@@ -10,6 +10,7 @@ app.collection = Backbone.Collection.extend({
   sync: function (type) {
     var todo = StorageHelper.get('todo');
     if (type === 'read') {
+      console.log('[collection] sync', type);
       this.push(todo);
       console.log('Получил все данные со стореджа->', todo);
     } else {

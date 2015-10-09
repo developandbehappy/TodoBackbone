@@ -61,7 +61,6 @@ app.View = Backbone.View.extend({
     var statusCol = colEl.get('status');
     var titleCol = colEl.get('title');
     colEl.checkOrUncheck();
-    console.log();
     this.removeTags();
     this.collection.sync();
     this.render();
