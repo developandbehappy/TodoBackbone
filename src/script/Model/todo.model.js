@@ -27,14 +27,14 @@ app.Model = Backbone.Model.extend({
     return this.get('check') === 'checked' && this.get('status') !== 'remove' ? this.checkIn() : this.checkOut();
   },
   checkIn: function () {
-    return this.set({check: '', status: 'active'});
     $.notify('[' + this.get('title') + '] -> was unchecked!');
     console.log('[ ' + this.get('title') + ' ] was unchecked');
+    return this.set({check: '', status: 'active'});
   },
   checkOut: function () {
-    return this.set({check: 'checked', status: 'done'});
     $.notify('[' + this.get('title') + '] -> was checked!', 'success');
     console.log('[ ' + this.get('title') + ' ] was checked');
+    return this.set({check: 'checked', status: 'done'});
   },
   toRemove: function () {
     return this.set({'status': 'remove', 'ico': 'fa-history', 'check': ''});
