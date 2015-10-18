@@ -3,8 +3,7 @@ var Backbone = Backbone || {};
 var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
-var collect = new app.collection();
-var model = new app.Model();
+var collect = new app.Collection();
 
 app.View = Backbone.View.extend({
   el: 'body',
@@ -57,9 +56,6 @@ app.View = Backbone.View.extend({
   checkData: function (e) {
     var id = e.toElement.id;
     var colEl = this.collection._byId[id];
-    var checkCol = colEl.get('check');
-    var statusCol = colEl.get('status');
-    var titleCol = colEl.get('title');
     colEl.checkOrUncheck();
     this.removeTags();
     this.collection.sync('set');

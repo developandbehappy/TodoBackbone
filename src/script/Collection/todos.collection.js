@@ -2,7 +2,7 @@ var app = app || {};
 var Backbone = Backbone || {};
 var StorageHelper = StorageHelper || {};
 
-app.collection = Backbone.Collection.extend({
+app.Collection = Backbone.Collection.extend({
   model: app.Model,
   initialize: function () {
     console.log('[collection] initialize');
@@ -19,7 +19,7 @@ app.collection = Backbone.Collection.extend({
     return todo;
   },
   isValidModel: function (obj) {
-    var model = new this.model(obj, {parse: true});
+    var model = new app.Model(obj, {parse: true});
     console.log('[collection] isValidModel', obj);
     return {
       status: model.isValid(),
