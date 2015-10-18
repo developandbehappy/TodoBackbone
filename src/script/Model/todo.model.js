@@ -14,8 +14,8 @@ app.Model = Backbone.Model.extend({
     return response;
   },
   validate: function (val) {
-    console.log('[model] validate', val);
     var titleLength = val.title.length;
+    console.log('[model] validate', val);
     if (!titleLength) {
       return 'Вы не можете добавить пустое задание';
     }

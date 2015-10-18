@@ -26,8 +26,8 @@ var StorageHelper = {
     this.storage.setItem(name, string);
   },
   get: function (name) {
-    console.info('[StorageHelper] get', name);
     var result = this.storage.getItem(name);
+    console.info('[StorageHelper] get', name);
     if (!result) {
       return false;
     }

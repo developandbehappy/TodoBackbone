@@ -8,8 +8,8 @@ app.collection = Backbone.Collection.extend({
     console.log('[collection] initialize');
   },
   sync: function (type) {
-    console.log('[collection] sync', type);
     var todo = StorageHelper.get('todo');
+    console.log('[collection] sync', type);
     if (type === 'read') {
       this.push(todo);
       console.log('Получил все данные со стореджа->', todo);
@@ -19,8 +19,8 @@ app.collection = Backbone.Collection.extend({
     return todo;
   },
   isValidModel: function (obj) {
-    console.log('[collection] isValidModel', obj);
     var model = new this.model(obj, {parse: true});
+    console.log('[collection] isValidModel', obj);
     return {
       status: model.isValid(),
       error: model.validationError

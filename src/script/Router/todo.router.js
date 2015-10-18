@@ -5,7 +5,7 @@ app.Router = Backbone.Router.extend({
   initialize: function () {
     app.view = new app.View();
     this.on('route', function (route) {
-      console.log("[router]: ", route);
+      console.log('[router]: ', route);
     });
   },
   routes: {
