@@ -9,7 +9,7 @@ app.Router = Backbone.Router.extend({
     });
   },
   routes: {
-    '': 'active',
+    '': 'empty',
     'active': 'active',
     'done': 'done',
     'remove': 'remove'
@@ -22,5 +22,8 @@ app.Router = Backbone.Router.extend({
   },
   remove: function () {
     app.view.blockRend('remove');
+  },
+  empty: function () {
+    app.view.blockRend();
   }
 });
