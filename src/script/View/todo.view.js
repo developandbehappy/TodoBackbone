@@ -36,10 +36,10 @@ app.View = Backbone.View.extend({
     this.render();
     this.clearVal();
   },
-  getVal() {
+  getVal: function () {
     return $('#text').val();
   },
-  clearVal() {
+  clearVal: function () {
     return $('#text').val('');
   },
   render: function () {
