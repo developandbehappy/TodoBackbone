@@ -46,7 +46,6 @@ app.View = Backbone.View.extend({
     this.collection.forEach(function (data) {
       $('#ul').append(this.template(data.toJSON()));
     }, this);
-    $('#ul.remove label').removeAttr('id', 'clickLabel');
     this.renderTodo();
   },
   renderTodo: function () {
@@ -70,6 +69,10 @@ app.View = Backbone.View.extend({
         this.$('#ul').append(this.template(data.toJSON()));
       }
     }, this);
+    this.changeAttr();
+  },
+  changeAttr: function () {
+    return $('#ul .remove input').attr('id', 'removeId');
   },
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
