@@ -81,17 +81,6 @@ app.View = Backbone.View.extend({
     this.removeTags();
     this.render();
   },
-  returnLabel: function (e) {
-    var elId = e.toElement.parentElement.children[1].id;
-    var colEl = this.collection.at(elId);
-    console.log(elId);
-    colEl.set('status', 'active');
-    colEl.set('ico', 'fa-times');
-    this.collection.sync('set');
-    console.log('Было возвращенно задание -> ' + colEl.get('title'));
-    this.removeTags();
-    this.render();
-  },
   removeTags: function () {
     return $('#ul').find('li').remove();
   }
