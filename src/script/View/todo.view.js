@@ -76,10 +76,8 @@ app.View = Backbone.View.extend({
   },
   deleteImg: function (e) {
     var elId = e.toElement.parentElement.children[0].id;
-    var colEl = this.collection.at(elId);
-    colEl.toRemove();
+    this.collection.removeModel(elId);
     this.collection.sync('set');
-    console.log('Было удаленно задание! -> ' + colEl.get('title'));
     this.removeTags();
     this.render();
   },

@@ -37,6 +37,6 @@ app.Model = Backbone.Model.extend({
     return this.set({check: 'checked', status: 'done'});
   },
   toRemove: function () {
-    return this.set({'status': 'remove', 'ico': 'fa-history', 'check': ''});
+    // app.Collection.removeModel(this.id);
   }
 });

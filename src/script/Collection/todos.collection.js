@@ -25,5 +25,8 @@ app.Collection = Backbone.Collection.extend({
       status: model.isValid(),
       error: model.validationError
     };
+  },
+  removeModel: function(index) {
+    this.remove(index);
   }
 });
