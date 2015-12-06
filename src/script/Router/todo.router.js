@@ -12,7 +12,7 @@ app.Router = Backbone.Router.extend({
     '': 'empty',
     'active': 'active',
     'done': 'done',
-    'remove': 'remove'
+    'all': 'all'
   },
   active: function () {
     app.view.blockRend('active');
@@ -20,8 +20,8 @@ app.Router = Backbone.Router.extend({
   done: function () {
     app.view.blockRend('done');
   },
-  remove: function () {
-    app.view.blockRend('remove');
+  all: function () {
+    app.view.blockRend('all');
   },
   empty: function () {
     app.view.blockRend();
