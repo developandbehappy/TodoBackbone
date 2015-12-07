@@ -5,8 +5,7 @@ app.Model = Backbone.Model.extend({
   defaults: {
     title: '',
     status: 'active',
-    check: '',
-    ico: 'fa-times'
+    check: ''
   },
   parse: function (response) {
     console.log('[model] parse', response);
@@ -35,8 +34,5 @@ app.Model = Backbone.Model.extend({
     $.notify('[' + this.get('title') + '] -> was checked!', 'success');
     console.log('[ ' + this.get('title') + ' ] was checked');
     return this.set({check: 'checked', status: 'done'});
-  },
-  toRemove: function () {
-    // app.Collection.removeModel(this.id);
   }
 });
