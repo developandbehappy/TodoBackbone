@@ -11,7 +11,8 @@ app.View = Backbone.View.extend({
   events: {
     'click #add': 'addData',
     'click .someJob': 'checkData',
-    'click .fa-times': 'deleteImg'
+    'click .fa-times': 'deleteImg',
+    'submit form': 'addData'
   },
   initialize: function () {
     this.template = _.template($('#template').html());
