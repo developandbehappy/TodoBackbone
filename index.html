@@ -9,7 +9,7 @@
   <title>Список заданий</title>
 </head>
 <body>
-<div id="block">
+<div id="block" class='container'>
   <h1 id="h1">Список заданий</h1>
   <div class="input-append">
   <form>
@@ -18,9 +18,9 @@
   </div>
   <div>
     <ul class="nav nav-tabs" id="nav">
-      <li><a href="#/all" class="btn-default" id="all">Все</a></li>
-      <li><a href="#/active" class="btn-default" id="active">Активные</a></li>
-      <li><a href="#/done" class="btn-default" id="done">Выполненные</a></li>
+      <li><a href="#/all" class="btn btn-primary btn-lg btn-block" id="all" role="button">Все</a></li>
+      <li><a href="#/active" class="btn btn-primary btn-lg btn-block" id="active" role="button">Активные</a></li>
+      <li><a href="#/done" class="btn btn-primary btn-lg btn-block" id="done" role="button">Выполненные</a></li>
       
     </ul>
   </div>
@@ -29,7 +29,9 @@
   <ul id="ul">
   </ul>
 </div>
+
 <script src="./vendor/jquery/jquery.min.js"></script>
+<script src="./vendor/bootstrap/bootstrap.min.js"></script>
 <script src="./vendor/notify/notify.min.js"></script>
 <script src="./vendor/underscore/underscore.js"></script>
 <script src="./vendor/backbone/backbone.js"></script>
