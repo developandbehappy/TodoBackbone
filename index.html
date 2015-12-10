@@ -3,33 +3,37 @@
 <head>
   <meta charset="utf-8">
    <link rel="stylesheet" href="./src/style/style.css">
-   <link rel="stylesheet" href="./vendor/bootstrap/bootstrap.min.css">
-   <link rel="stylesheet" href="./vendor/bootstrap/bootstrap-responsive.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <title>Список заданий</title>
 </head>
 <body>
-<div id="block" class='container'>
-  <h1 id="h1">Список заданий</h1>
-  <div class="input-append">
-  <form>
-      <input id="text" class="span2" id="appendedInputButton" size="16" type="text" placeholder="Добавить цель"><button id="add" class="btn" type="button">Добавить</button>
-  </form>
+<div class="container col-sm-6 col-sm-offset-3 col-xs-12 text-center" id="block">
+  <h1>TodoList</h1>
+  <div class="input-group">
+    <input type="text" class="form-control" id="text">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="add">Добавить</button>
+      </span>
   </div>
-  <div>
-    <ul class="nav nav-tabs" id="nav">
-      <li><a href="#/all" class="btn-lg" id="all" role="button">Все</a></li>
-      <li><a href="#/active" class="btn-lg" id="active" role="button">Активные</a></li>
-      <li><a href="#/done" class="btn-lg" id="done" role="button">Выполненные</a></li>
-      
+  <br>
+  <div class="btn-group btn-group-justified" id="nav">
+    <div class="btn-group">
+      <a href="#/all" role="button" class="btn btn-default" id="all">All</a>
+    </div>
+    <div class="btn-group">
+      <a href="#/active" role="button" class="btn btn-default" id="active">Active</a>
+    </div>
+    <div class="btn-group">
+      <a href="#/done" role="button" class="btn btn-default" id="done">Done</a>
+    </div>
+  </div>
+  <br>
+  <div id="blockOne">
+    <ul class="list-group" id="ul">
     </ul>
   </div>
 </div>
-<div id="blockOne">
-  <ul id="ul">
-  </ul>
-</div>
-
 <script src="./vendor/jquery/jquery.min.js"></script>
 <script src="./vendor/bootstrap/bootstrap.min.js"></script>
 <script src="./vendor/notify/notify.min.js"></script>
@@ -42,11 +46,11 @@
 <script src="./src/script/Router/todo.router.js"></script>
 <script src="./src/script/main.js"></script>
 <script id="template" type="text/template">
-<li class="<%= status %>">
-  <input  type="checkbox" class="someJob" id="<%= id %>" <%= check %>>
-  <label for="<%= id %>" class="<%= status %>" id="<%= id %>"> <%= title %> </label>
+  <li class="<%= status %> list-group-item">
+    <input  type="checkbox" class="someJob" id="<%= id %>" <%= check %>>
+    <label for="<%= id %>" class="<%= status %>" id="<%= id %>"> <%= title %> </label>
     <i class="fa fa-times imgMus" id="<%= status %>"></i>
-</li>
+  </li>
 </script>
 </body>
 </html>

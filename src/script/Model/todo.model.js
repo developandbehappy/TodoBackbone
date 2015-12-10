@@ -8,6 +8,7 @@ app.Model = Backbone.Model.extend({
     check: ''
   },
   parse: function (response) {
+    console.log('response', response);
     console.log('[model] parse', response);
     response.title = response.title.trim().replace(/<[^>]+>/g, '');
     return response;
