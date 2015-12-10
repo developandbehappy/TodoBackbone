@@ -10,12 +10,15 @@
 <body>
 <div class="container col-sm-6 col-sm-offset-3 col-xs-12 text-center" id="block">
   <h1>TodoList</h1>
-  <div class="input-group">
-    <input type="text" class="form-control" id="text">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" id="add">Добавить</button>
-      </span>
-  </div>
+
+  <form>
+    <div class="input-group">
+      <input type="text" class="form-control" id="text">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" id="add">Добавить</button>
+        </span>
+    </div>
+  </form>
   <br>
   <div class="btn-group btn-group-justified" id="nav">
     <div class="btn-group">
@@ -49,7 +52,7 @@
   <li class="<%= status %> list-group-item">
     <input  type="checkbox" class="someJob" id="<%= id %>" <%= check %>>
     <label for="<%= id %>" class="<%= status %>" id="<%= id %>"> <%= title %> </label>
-    <i class="fa fa-times imgMus" id="<%= status %>"></i>
+    <i class="glyphicon glyphicon-remove imgMus" id="<%= status %>"></i>
   </li>
 </script>
 </body>
