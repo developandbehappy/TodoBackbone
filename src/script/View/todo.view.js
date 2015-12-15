@@ -83,6 +83,6 @@ app.View = Backbone.View.extend({
     this.render();
   },
   removeTags: function () {
-    return $('#ul').find('li').remove();
+    return $('#ul').find('label').remove();
   }
 });

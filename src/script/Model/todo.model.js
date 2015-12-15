@@ -19,8 +19,8 @@ app.Model = Backbone.Model.extend({
     if (!titleLength) {
       return 'Вы не можете добавить пустое задание';
     }
-    if (titleLength >= 40) {
-      return 'Вы не можете добавить задание больше 40 символов!';
+    if (titleLength >= 25) {
+      return 'Вы не можете добавить задание больше 25 символов!';
     }
   },
   checkOrUncheck: function () {
