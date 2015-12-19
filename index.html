@@ -9,11 +9,11 @@
 <body>
 <div class="container col-sm-6 col-sm-offset-3 col-xs-12" id="block">
   <h1 class="text-center">TodoList</h1>
-  <form>
+  <form id="todoForm">
     <div class="input-group">
-      <input type="text" class="form-control" id="text">
+      <input type="text" class="form-control" id="todoFormText">
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button" id="add">Добавить</button>
+          <button class="btn btn-default" type="button" id="todoFormAdd">Добавить</button>
         </span>
     </div>
   </form>
@@ -47,10 +47,10 @@
 <script src="./src/script/Router/todo.router.js"></script>
 <script src="./src/script/main.js"></script>
 <script id="template" type="text/template">
-    <label class="list-group-item" id="<%= id %> <%= status %>" data-status="<%= status %>">
-      <input type="checkbox" class="someJob" id="<%= id %>" <%= check %>>
+    <label class="list-group-item" id="<%= id %>" data-status="<%= status %>">
+      <input type="checkbox" class="todoCheckboxItem" id="<%= id %>" <%= check %>>
       <%= title %>
-      <span class="close imgMus" id="<%= status %>">x</span>
+      <span class="close todoRemoveItem" data-id="<%= id %>">x</span>
     </label>
 </script>
 </body>

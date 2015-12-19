@@ -3,20 +3,19 @@ var Backbone = Backbone || {};
 var StorageHelper = StorageHelper || {};
 
 app.Collection = Backbone.Collection.extend({
-  model: app.Model,
   initialize: function () {
     console.log('[collection] initialize');
   },
   sync: function (type) {
-    var todo = StorageHelper.get('todo');
     console.log('[collection] sync', type);
     if (type === 'read') {
+      var todo = StorageHelper.get('todo');
       this.push(todo);
       console.log('Получил все данные со стореджа->', todo);
     } else {
+      console.log('Save all data in storage', this.toJSON());
       StorageHelper.setObject('todo', this.toJSON());
     }
-    return todo;
   },
   isValidModel: function (obj) {
     var model = new app.Model(obj, {parse: true});
@@ -30,8 +29,14 @@ app.Collection = Backbone.Collection.extend({
     this.remove(index);
   },
   getListByStatus: function (status) {
+    if (status === 'all') {
+      return this.models;
+    }
     return this.models.filter(function (item) {
       return item.get('status') === status;
     });
+  },
+  getSize: function () {
+    return this.models.length;
   }
 });

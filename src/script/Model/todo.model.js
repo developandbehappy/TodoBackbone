@@ -13,6 +13,18 @@ app.Model = Backbone.Model.extend({
     response.title = response.title.trim().replace(/<[^>]+>/g, '');
     return response;
   },
+  sync: function () {
+    console.log("sy!!");
+    return null;
+  },
+  save: function () {
+    console.log("save!!!");
+    return null;
+  },
+  fetch: function () {
+    console.log("fetch!!!");
+    return null;
+  },
   validate: function (val) {
     var titleLength = val.title.length;
     console.log('[model] validate', val);

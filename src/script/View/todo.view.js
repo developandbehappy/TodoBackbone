@@ -6,16 +6,19 @@ var _ = _ || {};
 app.View = Backbone.View.extend({
   el: 'body',
   events: {
-    'click #add': 'addData',
-    'click .someJob': 'checkData',
-    'click .close': 'deleteImg',
-    'submit form': 'addData'
+    'click #todoFormAdd': 'todoAddItem',
+//    'click .todoCheckboxItem': 'checkData',
+    'click .todoRemoveItem': 'todoDeleteItem',
+    'submit form': 'todoAddItem'
   },
   initialize: function () {
+    this.status = 'all';
     this.template = _.template($('#template').html());
     this.collection.sync('read');
   },
   render: function (status) {
+    console.log('Todo render status', status);
+    this.status = status;
     this.clearTodoListBody();
     this.btnDisableActiveStatus();
     this.btnEnableActiveStatus(status);
@@ -24,60 +27,48 @@ app.View = Backbone.View.extend({
     todoList.forEach(function (item) {
       $('#todoList').append(self.template(item.toJSON()));
     });
-//    this.collection.forEach(function (data) {
-//      if (data.get('status') === status) {
-//        this.$('#ul').append(this.template(data.toJSON()));
-//      } else if (!status || status === 'all') {
-//        this.$('#ul').append(this.template(data.toJSON()));
-//      }
-//    }, this);
-//    this.changeAttr();
   },
-  addData: function (e) {
-    var idObject = StorageHelper.get('todo').length || 0;
-    var obj = {
-      title: this.getVal(),
-      id: idObject
-    };
-    var validate = collect.isValidModel(obj);
+  todoAddItem: function (e) {
     e.preventDefault();
-    if (!validate.status) {
-      $.notify(validate.error);
-      return false;
-    }
-    collect.add(obj, {parse: true});
-    collect.sync();
-    this.removeTags();
-    this.render();
-    this.clearVal();
+    var collectionSize = this.collection.getSize();
+    var item = {
+      title: this.todoGetInputValue(),
+      id: collectionSize
+    };
+//    var validate = this.collection.isValidModel(item);
+//    if (!validate.status) {
+//      $.notify(validate.error);
+//      return false;
+//    }
+    this.collection.create(item);
+    console.log(this.collection.toJSON());
+
+//    this.collection.sync();
+//    this.todoClearInputValue();
+//    if (this.status === 'completed') {
+//      return false;
+//    }
+//    this.render(this.status);
   },
-  getVal: function () {
-    return $('#text').val();
+  todoGetInputValue: function () {
+    return $('#todoFormText').val();
   },
-  clearVal: function () {
-    return $('#text').val('');
-  },
-  renderTodo: function () {
-    var hash = location.hash;
-    this.blockRend(hash.substring(2));
+  todoClearInputValue: function () {
+    return $('#todoFormText').val('');
   },
   checkData: function (e) {
     var id = e.toElement.id;
     var colEl = this.collection._byId[id];
     colEl.checkOrUncheck();
-    this.removeTags();
-    this.collection.sync('set');
+    this.collection.sync();
     this.render();
   },
-  changeAttr: function () {
-    return $('#ul .remove input').attr('id', 'removeId');
-  },
-  deleteImg: function (e) {
-    var elId = e.toElement.parentElement.children[0].id;
-    this.collection.removeModel(elId);
-    this.collection.sync('set');
-    this.removeTags();
-    this.render();
+  todoDeleteItem: function (e) {
+    var $this = $(e.currentTarget);
+    var itemId = $this.data('id');
+    this.collection.removeModel(itemId);
+    this.collection.sync();
+    this.render(this.status);
   },
   clearTodoListBody: function () {
     return $('#todoList').html('');
