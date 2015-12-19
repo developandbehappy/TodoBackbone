@@ -1,4 +1,4 @@
-
-label[data-status='done'] {
+label[data-status='completed'] {
   text-decoration: line-through;
 }
+

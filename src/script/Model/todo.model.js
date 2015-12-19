@@ -34,6 +34,6 @@ app.Model = Backbone.Model.extend({
   checkOut: function () {
     $.notify('[' + this.get('title') + '] -> was checked!', 'success');
     console.log('[ ' + this.get('title') + ' ] was checked');
-    return this.set({check: 'checked', status: 'done'});
+    return this.set({check: 'checked', status: 'completed'});
   }
 });

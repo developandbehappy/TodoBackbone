@@ -3,27 +3,27 @@ var Backbone = Backbone || {};
 
 app.Router = Backbone.Router.extend({
   initialize: function () {
-    app.view = new app.View();
+    var collection = new app.Collection();
+    console.log('Router initialize');
+    app.view = new app.View({
+      collection: collection
+    });
     this.on('route', function (route) {
       console.log('[router]: ', route);
     });
   },
   routes: {
-    '': 'empty',
+    '': 'home',
     'active': 'active',
-    'done': 'done',
-    'all': 'all'
+    'completed': 'completed'
+  },
+  home: function () {
+    app.view.blockRend('all');
   },
   active: function () {
     app.view.blockRend('active');
   },
-  done: function () {
-    app.view.blockRend('done');
-  },
-  all: function () {
-    app.view.blockRend('all');
-  },
-  empty: function () {
-    app.view.blockRend();
+  completed: function () {
+    app.view.blockRend('completed');
   }
 });

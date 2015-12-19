@@ -3,11 +3,8 @@ var Backbone = Backbone || {};
 var StorageHelper = StorageHelper || {};
 var _ = _ || {};
 
-var collect = new app.Collection();
-
 app.View = Backbone.View.extend({
   el: 'body',
-  collection: collect,
   events: {
     'click #add': 'addData',
     'click .someJob': 'checkData',
@@ -17,7 +14,6 @@ app.View = Backbone.View.extend({
   initialize: function () {
     this.template = _.template($('#template').html());
     this.collection.sync('read');
-    this.render();
   },
   addData: function (e) {
     var idObject = StorageHelper.get('todo').length || 0;
@@ -43,12 +39,6 @@ app.View = Backbone.View.extend({
   clearVal: function () {
     return $('#text').val('');
   },
-  render: function () {
-    this.collection.forEach(function (data) {
-      $('#ul').append(this.template(data.toJSON()));
-    }, this);
-    this.renderTodo();
-  },
   renderTodo: function () {
     var hash = location.hash;
     this.blockRend(hash.substring(2));
@@ -63,6 +53,8 @@ app.View = Backbone.View.extend({
   },
   blockRend: function (status) {
     this.removeTags();
+    this.btnDisableActiveStatus();
+    this.btnEnableActiveStatus(status);
     this.collection.forEach(function (data) {
       if (data.get('status') === status) {
         this.$('#ul').append(this.template(data.toJSON()));
@@ -84,5 +76,15 @@ app.View = Backbone.View.extend({
   },
   removeTags: function () {
     return $('#ul').find('label').remove();
+  },
+  btnDisableActiveStatus: function () {
+    var btnList = $('#nav').find('.btn');
+    btnList.removeClass('active');
+  },
+  btnEnableActiveStatus: function (status) {
+    console.log('status', status);
+    console.log(typeof status);
+//    var btn = $('#nav').find("#" + status);
+//    btn.addClass('active');
   }
 });
