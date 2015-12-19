@@ -3,8 +3,8 @@ var Backbone = Backbone || {};
 
 app.Router = Backbone.Router.extend({
   initialize: function () {
-    var collection = new app.Collection();
     console.log('Router initialize');
+    var collection = new app.Collection();
     app.view = new app.View({
       collection: collection
     });
@@ -18,12 +18,12 @@ app.Router = Backbone.Router.extend({
     'completed': 'completed'
   },
   home: function () {
-    app.view.blockRend('all');
+    app.view.render('all');
   },
   active: function () {
-    app.view.blockRend('active');
+    app.view.render('active');
   },
   completed: function () {
-    app.view.blockRend('completed');
+    app.view.render('completed');
   }
 });

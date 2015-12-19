@@ -15,6 +15,19 @@ app.View = Backbone.View.extend({
     this.template = _.template($('#template').html());
     this.collection.sync('read');
   },
+  render: function (status) {
+    this.clearTodoListBody();
+    this.btnDisableActiveStatus();
+    this.btnEnableActiveStatus(status);
+//    this.collection.forEach(function (data) {
+//      if (data.get('status') === status) {
+//        this.$('#ul').append(this.template(data.toJSON()));
+//      } else if (!status || status === 'all') {
+//        this.$('#ul').append(this.template(data.toJSON()));
+//      }
+//    }, this);
+//    this.changeAttr();
+  },
   addData: function (e) {
     var idObject = StorageHelper.get('todo').length || 0;
     var obj = {
@@ -51,19 +64,6 @@ app.View = Backbone.View.extend({
     this.collection.sync('set');
     this.render();
   },
-  blockRend: function (status) {
-    this.removeTags();
-    this.btnDisableActiveStatus();
-    this.btnEnableActiveStatus(status);
-    this.collection.forEach(function (data) {
-      if (data.get('status') === status) {
-        this.$('#ul').append(this.template(data.toJSON()));
-      } else if (!status || status === 'all') {
-        this.$('#ul').append(this.template(data.toJSON()));
-      }
-    }, this);
-    this.changeAttr();
-  },
   changeAttr: function () {
     return $('#ul .remove input').attr('id', 'removeId');
   },
@@ -74,17 +74,15 @@ app.View = Backbone.View.extend({
     this.removeTags();
     this.render();
   },
-  removeTags: function () {
-    return $('#ul').find('label').remove();
+  clearTodoListBody: function () {
+    return $('#todoList').html('');
   },
   btnDisableActiveStatus: function () {
     var btnList = $('#nav').find('.btn');
     btnList.removeClass('active');
   },
   btnEnableActiveStatus: function (status) {
-    console.log('status', status);
-    console.log(typeof status);
-//    var btn = $('#nav').find("#" + status);
-//    btn.addClass('active');
+    var btn = $('#nav').find("#" + status);
+    btn.addClass('active');
   }
 });

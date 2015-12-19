@@ -28,5 +28,8 @@ app.Collection = Backbone.Collection.extend({
   },
   removeModel: function (index) {
     this.remove(index);
+  },
+  getListByStatus: function (status) {
+
   }
 });
