@@ -47,7 +47,7 @@
 <script src="./src/script/Router/todo.router.js"></script>
 <script src="./src/script/main.js"></script>
 <script id="template" type="text/template">
-    <label class="list-group-item" id="<%= id %>">
+    <label class="list-group-item" id="<%= id %> <%= status %>" data-status="<%= status %>">
       <input type="checkbox" class="someJob" id="<%= id %>" <%= check %>>
       <%= title %>
       <span class="close imgMus" id="<%= status %>">x</span>
