@@ -19,6 +19,7 @@ app.View = Backbone.View.extend({
     this.clearTodoListBody();
     this.btnDisableActiveStatus();
     this.btnEnableActiveStatus(status);
+    this.collection.getListByStatus('test');
 //    this.collection.forEach(function (data) {
 //      if (data.get('status') === status) {
 //        this.$('#ul').append(this.template(data.toJSON()));

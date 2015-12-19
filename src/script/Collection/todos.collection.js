@@ -30,6 +30,10 @@ app.Collection = Backbone.Collection.extend({
     this.remove(index);
   },
   getListByStatus: function (status) {
-
+    console.log('status', status);
+    console.log('this', this);
+    return this.models.filter(function (item) {
+      return item.get('status') === status;
+    });
   }
 });
