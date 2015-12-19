@@ -1,6 +1,3 @@
-label {
-  text-indent: 10px;
-}
 
 label[data-status='done'] {
   text-decoration: line-through;

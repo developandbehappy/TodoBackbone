@@ -20,13 +20,13 @@ app.View = Backbone.View.extend({
     this.render();
   },
   addData: function (e) {
-    e.preventDefault(); 
     var idObject = StorageHelper.get('todo').length || 0;
     var obj = {
       title: this.getVal(),
       id: idObject
     };
     var validate = collect.isValidModel(obj);
+    e.preventDefault();
     if (!validate.status) {
       $.notify(validate.error);
       return false;
